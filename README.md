@@ -4,7 +4,7 @@ Note: this is a static paper-specific repository, and as such, may not contain u
 ## Links to the crisprHAL repositories, papers, and web tool:
 * [Up-to-date crisprHAL prediction tool for use](https://github.com/tbrowne5/crisprHAL)
 * [Online crisprHAL prediction tool](https://crisprhal.streamlit.app/)
-* [crisprHAL 2.0 paper repository](https://github.com/tbrowne5/Better-data-for-better-predictions-data-curation-improves-deep-learning-for-sgRNA-Cas9-prediction/)
+* [crisprHAL 2.0 paper repository](https://github.com/tbrowne5/Better-data-for-better-predictions-data-curation-improves-deep-learning-for-sgRNA-Cas9-prediction/) — You are here
 * crisprHAL 2.0 pre-print (Available soon)
 * crisprHAL SaCas9 paper repository (Available soon)
 * crisprHAL SaCas9 pre-print (Available soon)
