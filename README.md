@@ -21,6 +21,8 @@ If you wish to run the model on your own nucleotide sequence follow parts 0 to 3
 
 If you wish to validate the model or to update the model with your own data, follow parts 4 to 5.
 
+As this repository contains the most up-to-date models, if you wish to test a model from a specific paper, please use the paper-specific repository link listed above.
+
 ## Sections of this guide:
 
 Setting up and running the model to predict sgRNA activities:
