@@ -11,6 +11,8 @@ outputFile = None
 compare = False
 
 
+# PERHAPS MOVE THIS TO PROCESSING AND HAVE A VERY SIMPLE CRISPRHAL.PY FILE!!!
+
 def parse_args(args):
     global training, modelName, modelNames, epochs, inputFile, outputFile, compare
 
@@ -39,6 +41,10 @@ def parse_args(args):
             print("  --epochs, -e        Number of training epochs (default: 50)")
             print("  --help, -h          Show this help message")
             sys.exit(0)
+    
+    if training == True and inputFile is not None:
+        print("Error: Please specify either training mode or an input file for prediction generation.")
+        sys.exit(1)
 
 # Read in arguments
 # If no input specified, use default hold-out test set
@@ -47,8 +53,17 @@ def parse_args(args):
 def run_model():
     global training, modelName, inputFile, outputFile, compareFile, epochs
     
-    predictionModel = model.load_model(modelName + ".keras")
+    model.load_model(modelName + ".keras")
+
+    # Model name provides input sequence length for processing
+    # If inputFile default of "None" is passed, the hold-out test set will be used instead
+    # The compare flag indicates that the input file contains a second column of scores to be used for comparison
     predictionData = process.read_input(modelName, inputFile, compare)
+    
+    if training:
+        print("Training model")
+    else:
+        predictionData = model.predict(predictionData)
 
 if __name__ == "__main__":
     parse_args(sys.argv[1:])
