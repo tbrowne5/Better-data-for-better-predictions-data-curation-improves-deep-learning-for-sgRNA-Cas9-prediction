@@ -1,8 +1,10 @@
-# crisprHAL — Better data for better predictions: data curation improves deep learning  for sgRNA/Cas9  prediction
-Note: this is a static paper-specific repository, and as such, it may not contain the most up-to-date prediction models
+# crisprHAL — Better data for better predictions: data curation improves deep learning for sgRNA/Cas9 prediction
+Note: this is a static paper-specific repository, and as such, it may not contain the most up-to-date prediction models. Please visit the following pages for use of the crisprHAL model
 
-## The up-to-date crisprHAL model can be found at: [https://github.com/tbrowne5/crisprHAL](https://github.com/tbrowne5/crisprHAL)
-## The online crisprHAL prediction model can be found at: [crisprHAL.streamlit.io](https://crisprhal.streamlit.app/)
+### The up-to-date crisprHAL repository: [github.com/tbrowne5/crisprHAL](https://github.com/tbrowne5/crisprHAL)
+### The online crisprHAL prediction model: [crisprHAL.streamlit.io](https://crisprhal.streamlit.app/)
+### The original crisprHAL paper repository: [github.com/tbrowne5/A-generalizable-Cas9-sgRNA-prediction-model-using-machine-transfer-learning](https://github.com/tbrowne5/A-generalizable-Cas9-sgRNA-prediction-model-using-machine-transfer-learning)
+### The original crisprHAL publication: [A generalizable Cas9/sgRNA prediction model using machine transfer learning with small high-quality datasets](https://doi.org/10.1038/s41467-023-41143-7)
 
 ## crisprHAL: [A generalizable Cas9/sgRNA prediction model using machine transfer learning with small high-quality datasets](https://doi.org/10.1038/s41467-023-41143-7)
 
