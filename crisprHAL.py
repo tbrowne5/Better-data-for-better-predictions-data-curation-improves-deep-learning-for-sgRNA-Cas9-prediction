@@ -5,7 +5,7 @@ from processing import process
 training = False
 modelName = "TEVSPCAS9"
 modelNames = ["TEVSPCAS9","TEVCAS9", "TEV", "SPCAS9", "WTSPCAS9", "WT-SPCAS9", "WILD-TYPE-SPCAS9","WILD-TYPE","WILDTYPE", "WT", "ESPCAS9", "ESP"]
-epochs = 50
+epochs = None
 inputFile = None
 outputFile = None
 compare = False
@@ -53,17 +53,23 @@ def parse_args(args):
 def run_model():
     global training, modelName, inputFile, outputFile, compareFile, epochs
     
-    model.load_model(modelName + ".keras")
-
-    # Model name provides input sequence length for processing
-    # If inputFile default of "None" is passed, the hold-out test set will be used instead
-    # The compare flag indicates that the input file contains a second column of scores to be used for comparison
-    predictionData = process.read_input(modelName, inputFile, compare)
-    
     if training:
         print("Training model")
+        trainingData = process.read_training_data(modelName)
+        testingData = process.read_testing_data(modelName)
+        model.train(modelName, trainingData, testingData, epochs)
     else:
-        predictionData = model.predict(predictionData)
+        # Model name provides input sequence length for processing
+        # If inputFile default of "None" is passed, the hold-out test set will be used instead
+        # The compare flag indicates that the input file contains a second column of scores to be used for comparison
+        inputSequences, encodedInputSequences, inputScores = process.read_input(modelName, inputFile, compare)
+        model.load_model(modelName + ".keras")
+        predictions= model.predict(inputSequences)
+        if compare:
+            # Compare predictions with the second column of scores in the input file
+            # Returns both a Spearman and Pearson correlation coefficient
+            compareData = process.compare_predictions(predictions, inputScores)
+
 
 if __name__ == "__main__":
     parse_args(sys.argv[1:])
