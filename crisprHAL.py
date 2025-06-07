@@ -1,6 +1,6 @@
 import sys
 from model import model
-from processing import process
+from processing import processing
 
 training = False
 modelName = "TEVSPCAS9"
@@ -55,6 +55,8 @@ def parse_args(args):
 
 def run_model():
     global training, modelName, inputFile, outputFile, compareFile, epochs, circularInput
+
+    process = processing()
     
     if training:
         print("Training model")
@@ -65,7 +67,10 @@ def run_model():
         # Model name provides input sequence length for processing
         # If inputFile default of "None" is passed, the hold-out test set will be used instead
         # The compare flag indicates that the input file contains a second column of scores to be used for comparison
+        print(f"{modelName} {inputFile} {compare} {circularInput}")
         inputSequences, encodedInputSequences, inputScores = process.read_input(modelName, inputFile, compare, circularInput)
+        print(len(inputSequences))
+        print(encodedInputSequences.shape)
         model.load_model(modelName + ".keras")
         predictions= model.predict(encodedInputSequences)
         if compare:
