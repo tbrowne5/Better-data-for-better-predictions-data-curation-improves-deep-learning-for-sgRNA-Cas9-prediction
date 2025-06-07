@@ -38,8 +38,35 @@ def onehotencode(self, nucleotideEncoding):
     for sequence in nucleotideEncoding: onehotencoding.append(np.array([nt_to_ohe_dict[nt.upper()] for nt in sequence]))
     return np.array(onehotencoding)
 
-def process_fasta(self, fastaFile, inputParameters=[37, 3, 14]):
+def find_targets(self, sequence, inputParameters, circular=True):
+    if len(sequence) < inputParameters[0]:
+        print(f"Error: Input sequence '{sequence}' is shorter than the required length of {inputParameters[0]} bases.")
+        return []
+    else:
+        sequence = sequence.upper().replace("U", "T").replace(" ", "").replace("\n", "")
+        sequence = sequence
+        targets = []
+
+
     return
+
+def process_fasta(self, fastaFile, inputParameters=[37, 3, 14], circular=True):
+    
+    # Read the FASTA file
+    inputSequences = []
+    newSequence = False
+    with open(fastaFile, 'r') as file:
+        sequence = ""
+        for line in file:
+            if line.startswith('>'):
+                if len(sequence) > 0:
+                    inputSequences += self.find_targets(sequence, inputParameters)
+                    sequence = ""
+            else:
+                sequence += line.strip()
+        inputSequences += self.find_targets(sequence, inputParameters)
+    
+    return inputSequences, self.onehotencode(inputSequences), None
 
 def process_csv(self, csvFile, predictionColumn=False):
     # Check if comma or tab separated via file name
@@ -68,14 +95,14 @@ def read_training_data(self, modelName): return process_csv(self, modelVersionTr
 
 def read_testing_data(self, modelName): return process_csv(self, modelVersionTestingData[modelName], predictionColumn=True)
 
-def read_input(self, modelName, inputFile, compare):
+def read_input(self, modelName, inputFile, compare, circular=True):
 
     # If no parameters specified, the program will provide hold-out testing data performance
     if inputFile == None:
         return self.process_csv(modelVersionTestingData[modelName], predictionColumn=True)
     # Recommended input format for model use (no fiddling with input sequence lengths)
     elif inputFile.endswith('.fasta') or inputFile.endswith('.fa'):
-        return self.process_fasta(inputFile)
+        return self.process_fasta(inputFile, circular)
     # Method for validating model performance, requires explicit input sequence lengths
     elif inputFile.endswith('.csv') or inputFile.endswith('.tsv'):
         return self.process_csv(inputFile, predictionColumn=compare)
