@@ -28,7 +28,7 @@ def parse_args(args):
         elif args[i] == "--input" or args[i] == "-i": inputFile = args[i + 1]
         elif args[i] == "--output" or args[i] == "-o": outputFile = args[i + 1]
         elif args[i] == "--circular": circularInput = True
-        elif args[i] == "--compare" or args[i] == "-c": compare = args[i + 1]
+        elif args[i] == "--compare" or args[i] == "-c": compare = True
         elif args[i] == "--epochs" or args[i] == "-e": epochs = int(args[i + 1])
         elif args[i] == "--summary" or args[i] == "-s": summary = True
         elif args[i] == "--model" or args[i] == "-m" or args[i] == "--enzyme":
@@ -42,14 +42,14 @@ def parse_args(args):
         elif args[i] == "--help" or args[i] == "-h":
             print("Usage: python crisprHAL.py [options]")
             print("Options:")
-            print("  --model, -m         Specify the model name (default: TevSpCas9)")
-            print("  --input, -i         Input file for training or prediction")
-            print("  --output, -o        Output file for results")
-            print("  --circular          Circular DNA sequence (default: False)")
-            print("  --compare, -c       Input file contains second column of scores for comparison")
-            print("  --train, -t         Train the model")
-            print("  --epochs, -e        Number of training epochs (default: 50)")
-            print("  --help, -h          Show this help message")
+            print("  --model, -m  [TevSpCas9, eSpCas9, WT-SpCas9]  Specify the model name (default: TevSpCas9)")
+            print("  --input, -i  [Input file path]                Input file for prediction (fasta, csv, or tsv)")
+            print("  --output, -o [Output file path]               Output file for prediction results")
+            print("  --circular                                    Process fasta as a circular input sequence")
+            print("  --compare, -c                                 Compare predictions with scores in the input file second column")
+            print("  --train, -t                                   Train the model specified")
+            print("  --epochs, -e [Integer epoch value]            Specify number of epochs for training (default: model-specific)")
+            print("  --help, -h                                    Show this help message")
             sys.exit(0)
     
     if training == True and inputFile is not None:
