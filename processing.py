@@ -1,5 +1,6 @@
 
 import numpy as np
+from scipy.stats import spearmanr, pearsonr
 
 class processing:
     
@@ -123,4 +124,14 @@ class processing:
             return self.process_csv(inputFile, predictionColumn=compare)
         else:
             raise ValueError("Unsupported file format, please provide an input of the format: .fasta, .fa, .csv, or .tsv")
+    
+    def compare_scores(self, predictions, actual):
         
+        if len(predictions) != len(actual):
+            raise ValueError("Predictions and actual scores must have the same length.")
+        
+        spearman_corr, _ = spearmanr(predictions, actual)
+        pearson_corr, _ = pearsonr(predictions, actual)
+
+        print(f"Spearman correlation: {spearman_corr:.4f}")
+        print(f"Pearson correlation: {pearson_corr:.4f}")
