@@ -131,8 +131,10 @@ class processing:
             raise ValueError("Predictions and actual scores must have the same length.")
         
         # Calculate Spearman and Pearson correlations from numpy arrays
-        spearman_corr, _ = spearmanr(predictions, np.array(actual), axis=0)
-        pearson_corr, _ = pearsonr(predictions, np.array(actual), axis=0)
+        predictions = np.array(predictions).flatten()
+        
+        spearman_corr, _ = spearmanr(predictions, actual, axis=0)
+        pearson_corr, _ = pearsonr(predictions, actual, axis=0)
 
         print(f"Spearman correlation: {spearman_corr:.4f}")
         print(f"Pearson correlation: {pearson_corr:.4f}")
