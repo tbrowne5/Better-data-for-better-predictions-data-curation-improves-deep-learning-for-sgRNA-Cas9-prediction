@@ -72,7 +72,7 @@ def run_model():
         testingData = process.read_testing_data(modelName)
         if epochs is None: epochs = process.modelVersionDefaultEpochs[modelName]
         for i in range(0,epochs):
-            model.train(trainingData[1], trainingData[2], 1)
+            model.train(trainingData[1], trainingData[2], epochs=1, batch_size=1024, verbose=1)
             process.compare_predictions(model.predict(testingData[1]), testingData[2])
     else:
         # Model name provides input sequence length for processing
