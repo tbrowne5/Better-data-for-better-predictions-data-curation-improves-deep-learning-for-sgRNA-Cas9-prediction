@@ -64,7 +64,7 @@ def run_model():
         print("Training model")
         trainingData = process.read_training_data(modelName)
         testingData = process.read_testing_data(modelName)
-        model.train(modelName, trainingData[1], trainingData[2], epochs)
+        model.train(trainingData[1], trainingData[2], epochs)
         process.compare_predictions(model.predict(testingData[1]), testingData[2])
     else:
         # Model name provides input sequence length for processing

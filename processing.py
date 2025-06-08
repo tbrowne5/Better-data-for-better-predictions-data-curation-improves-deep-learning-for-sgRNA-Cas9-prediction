@@ -100,7 +100,6 @@ class processing:
                     targetAndScore = line.strip().split(delimiter)
                     inputSequences.append(targetAndScore[0])
                     if predictionColumn and len(targetAndScore) > 1: scores.append(float(targetAndScore[1]))
-                    else: scores.append(targetAndScore[0])
 
         oneHotEncoded = self.onehotencode(inputSequences)
 
