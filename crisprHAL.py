@@ -83,7 +83,6 @@ def run_model():
         if compare:
             # Compare predictions with the second column of scores in the input file
             process.compare_predictions(predictions, inputScores)
-        print(f"\n\n{predictions}\n\n")
         process.write_predictions(inputSequences, predictions, outputFile, inputFile, inputScores)
 
 if __name__ == "__main__":
