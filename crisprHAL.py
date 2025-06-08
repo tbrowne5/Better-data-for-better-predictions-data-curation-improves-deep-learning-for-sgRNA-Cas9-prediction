@@ -1,5 +1,5 @@
 import sys
-from model import model
+from model import models
 from processing import processing
 
 training = False
@@ -10,7 +10,7 @@ inputFile = None
 outputFile = None
 compare = False
 circularInput = False
-
+summary = False
 
 # PERHAPS MOVE THIS TO PROCESSING AND HAVE A VERY SIMPLE CRISPRHAL.PY FILE!!!
 
@@ -24,6 +24,7 @@ def parse_args(args):
         elif args[i] == "--circular": circularInput = True
         elif args[i] == "--compare" or args[i] == "-c": compare = args[i + 1]
         elif args[i] == "--epochs" or args[i] == "-e": epochs = int(args[i + 1])
+        elif args[i] == "--summary" or args[i] == "-s": summary = True
         elif args[i] == "--model" or args[i] == "-m" or args[i] == "--enzyme":
             if args[i + 1].upper() in modelNames:
                 if args[i + 1].upper() in ["TEVSPCAS9","TEVCAS9", "TEV", "SPCAS9"]: modelName = "TEVSPCAS9"
@@ -57,6 +58,7 @@ def run_model():
     global training, modelName, inputFile, outputFile, compareFile, epochs, circularInput
 
     process = processing()
+    model = models(modelName, process.modelVersionInputLength[modelName][0], summary)
     
     if training:
         print("Training model")

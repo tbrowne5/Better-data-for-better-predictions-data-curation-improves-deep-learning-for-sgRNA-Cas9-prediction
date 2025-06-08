@@ -8,8 +8,8 @@ class processing:
 
     modelVersionInputLength = {
         "TEVSPCAS9": [37, 3, 14],
-        "ESPCAS9": [400, 190, 190],
-        "WT-SPCAS9": [300, 140, 140]
+        "WT-SPCAS9": [400, 190, 190],
+        "ESPCAS9": [300, 140, 140]
         }
 
     modelVersionPath = {
@@ -83,6 +83,7 @@ class processing:
         return inputSequences, self.onehotencode(inputSequences), None
 
     def process_csv(self, csvFile, predictionColumn=False):
+        
         # Check if comma or tab separated via file name
         if csvFile.endswith('.csv'): delimiter = ','
         elif csvFile.endswith('.tsv'): delimiter = '\t'
