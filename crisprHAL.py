@@ -80,9 +80,6 @@ def run_model():
         print(predictions.shape)
         print(outputFile)
         print(inputFile)
-        print(inputScores)
-        print(predictions)
-        print(inputSequences)
         if compare:
             # Compare predictions with the second column of scores in the input file
             process.compare_predictions(predictions, inputScores)

@@ -149,6 +149,7 @@ class processing:
             else:
                 outputFile = "example_predictions.csv"
         # Write predictions to a CSV file
+        print(outputFile)
         with open(outputFile, 'w') as file:
             if inputScores is not None:
                 file.write("sgRNA,Score,Predictions\n")
