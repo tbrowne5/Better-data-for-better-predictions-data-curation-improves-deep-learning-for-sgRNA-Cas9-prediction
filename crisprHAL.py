@@ -78,6 +78,8 @@ def run_model():
         model.load_model(modelName)
         predictions= model.predict(encodedInputSequences).flatten()
         print(predictions.shape)
+        print(inputSequences)
+        print(inputSequences.shape)
         print(outputFile)
         print(inputFile)
         if compare:
