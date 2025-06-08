@@ -64,7 +64,8 @@ def run_model():
         print("Training model")
         trainingData = process.read_training_data(modelName)
         testingData = process.read_testing_data(modelName)
-        model.train(modelName, trainingData, testingData, epochs)
+        model.train(modelName, trainingData[1], np.array(trainingData[2]), epochs)
+        process.compare_predictions(model.predict(testingData[1]), testingData[2])
     else:
         # Model name provides input sequence length for processing
         # If inputFile default of "None" is passed, the hold-out test set will be used instead

@@ -130,9 +130,8 @@ class processing:
         if len(predictions) != len(actual):
             raise ValueError("Predictions and actual scores must have the same length.")
         
-        # Calculate Spearman and Pearson correlations from numpy arrays
+        # Calculate Spearman and Pearson correlations
         predictions = np.array(predictions).flatten()
-        
         spearman_corr, _ = spearmanr(predictions, actual, axis=0)
         pearson_corr, _ = pearsonr(predictions, actual, axis=0)
 
