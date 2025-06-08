@@ -151,7 +151,9 @@ class processing:
         # Predictions and input scores are numpy arrays
         predictions = np.array(predictions).reshape(-1, 1)
         if inputScores is not None:
-            inputScores = np.array(inputScores).flatten().reshape(-1, 1)
+            inputScores = np.array(inputScores).reshape(-1, 1)
+            # Remove brackets
+            inputScores = [str(score[0]) for score in np.array(inputScores).reshape(-1, 1)]
         # Write predictions to a CSV file
         with open(outputFile, 'w') as file:
             if inputScores is not None:
