@@ -73,7 +73,7 @@ def run_model():
         inputSequences, encodedInputSequences, inputScores = process.read_input(modelName, inputFile, compare, circularInput)
         print(len(inputSequences))
         print(encodedInputSequences.shape)
-        model.load_model(modelName + ".keras")
+        model.load_model(modelName)
         predictions= model.predict(encodedInputSequences)
         if compare:
             # Compare predictions with the second column of scores in the input file
