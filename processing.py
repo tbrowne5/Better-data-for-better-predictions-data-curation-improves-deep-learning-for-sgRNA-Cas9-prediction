@@ -125,7 +125,7 @@ class processing:
         else:
             raise ValueError("Unsupported file format, please provide an input of the format: .fasta, .fa, .csv, or .tsv")
     
-    def compare_scores(self, predictions, actual):
+    def compare_predictions(self, predictions, actual):
         
         if len(predictions) != len(actual):
             raise ValueError("Predictions and actual scores must have the same length.")
