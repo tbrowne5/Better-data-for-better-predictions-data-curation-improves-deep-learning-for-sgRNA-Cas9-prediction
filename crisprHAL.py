@@ -79,8 +79,10 @@ def run_model():
         predictions= model.predict(encodedInputSequences)
         if compare:
             # Compare predictions with the second column of scores in the input file
-            # Returns both a Spearman and Pearson correlation coefficient
-            compareData = process.compare_predictions(predictions, inputScores)
+            process.compare_predictions(predictions, inputScores)
+            process.write_predictions(inputSequences, predictions, outputFile, inputFile, inputScores)
+        else:
+            process.write_predictions(inputSequences, predictions, outputFile, inputFile)
 
 
 if __name__ == "__main__":

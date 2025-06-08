@@ -138,3 +138,24 @@ class processing:
 
         print(f"Spearman correlation: {spearman_corr:.4f}")
         print(f"Pearson correlation: {pearson_corr:.4f}")
+    
+    def write_predictions(inputSequences, predictions, outputFile=None, inputFile=None, inputScores=None):
+
+        # If output file is not specified, use inputfile name with "_predictions.csv" suffix
+        # If neither inputFile nor outputFile is specified, write to "example_predictions.csv"
+        if outputFile is None:
+            if inputFile is not None:
+                outputFile = inputFile.rsplit('.', 1)[0] + "_predictions.csv"
+            else:
+                outputFile = "example_predictions.csv"
+        # Write predictions to a CSV file
+        with open(outputFile, 'w') as file:
+            if inputScores is not None:
+                file.write("sgRNA,Score,Predictions\n")
+                for seq, score, pred in zip(inputSequences, inputScores, predictions):
+                    file.write(f"{seq},{score},{pred[0]}\n")
+            else:
+                file.write("sgRNA,Predictions\n")
+                for seq, pred in zip(inputSequences, predictions):
+                    file.write(f"{seq},{pred[0]}\n")
+
