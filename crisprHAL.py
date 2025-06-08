@@ -83,10 +83,7 @@ def run_model():
         if compare:
             # Compare predictions with the second column of scores in the input file
             process.compare_predictions(predictions, inputScores)
-            process.write_predictions(inputSequences, predictions, outputFile, inputFile, inputScores)
-        else:
-            process.write_predictions(inputSequences, predictions, outputFile, inputFile)
-
+        process.write_predictions(inputSequences, predictions, outputFile, inputFile, inputScores)
 
 if __name__ == "__main__":
     parse_args(sys.argv[1:])
