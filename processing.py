@@ -143,16 +143,16 @@ class processing:
 
         # If output file is not specified, use inputfile name with "_predictions.csv" suffix
         # If neither inputFile nor outputFile is specified, write to "example_predictions.csv"
-        print(f"0{outputFile}")
         if outputFile is None:
             if inputFile is not None:
                 outputFile = inputFile.rsplit('.', 1)[0] + "_predictions.csv"
-                print(f"1{outputFile}")
             else:
                 outputFile = "example_predictions.csv"
-                print(f"2outputFile")
+        # Predictions and input scores are numpy arrays
+        predictions = np.array(predictions).reshape(-1, 1)
+        if inputScores is not None:
+            inputScores = np.array(inputScores).reshape(-1, 1)
         # Write predictions to a CSV file
-        print(outputFile)
         with open(outputFile, 'w') as file:
             if inputScores is not None:
                 file.write("sgRNA,Score,Predictions\n")
