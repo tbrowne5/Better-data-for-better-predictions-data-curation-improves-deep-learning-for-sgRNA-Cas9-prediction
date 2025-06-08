@@ -105,10 +105,10 @@ class models:
     def load_model(self, basename, path="."):
         path = path.strip("/")
         try:
-            self.model = k.models.load_model(path + "/model_saves/" + basename + ".keras")
-            print(f"Loaded the model from the path: {path}/model_saves/{basename}.keras")
+            self.model = k.models.load_model(path + "/models/" + basename + ".keras")
+            print(f"Loaded the model from the path: {path}/models/{basename}.keras")
         except Exception as e:
-            print(f"ERROR: There was an issue loading the model: {path}/model_saves/{basename}.keras\n{e}") 
+            print(f"ERROR: There was an issue loading the model: {path}/models/{basename}.keras\n{e}") 
     
     def compile(self):
         try:
