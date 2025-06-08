@@ -11,7 +11,7 @@ class models:
     nucleotide_dimensions=0
     compile_options={"optimizer": "unset", "loss": "unset"}
     
-    def __init__(self, model_name, input_length, nt_dims=4, optimizer="adam", learning_rate=0.001, loss_function="mean_squared_error", drop_rate=0.3,CNN_filters=128, window_size=3, CNN_drop=0.3, conv1D_padding="same", CNN_dense1=128, CNN_dense2=64, maxpool1D_padding="same", RNN_size=128, RNN_dense1=128, RNN_dense2=64, CNN_RNN_drop=0.3):
+    def __init__(self, model_name, input_length, summary, nt_dims=4, optimizer="adam", learning_rate=0.001, loss_function="mean_squared_error", drop_rate=0.3,CNN_filters=128, window_size=3, CNN_drop=0.3, conv1D_padding="same", CNN_dense1=128, CNN_dense2=64, maxpool1D_padding="same", RNN_size=128, RNN_dense1=128, RNN_dense2=64, CNN_RNN_drop=0.3):
         
         print("\nINITIALIZATION OF MODELS\n")
         try:
@@ -22,7 +22,7 @@ class models:
         try:
             self.nucleotide_dimensions=nt_dims
             self.model = self.build_crisprHAL_GPU(input_length, drop_rate, CNN_filters, window_size, CNN_drop, conv1D_padding, CNN_dense1, CNN_dense2, maxpool1D_padding, RNN_size, RNN_dense1, RNN_dense2, CNN_RNN_drop)
-            self.model.summary()
+            if summary: self.model.summary()
             print("\n" + model_name + " model loaded.\n")
         except Exception as e:
             print(f"ERROR: Model name {model_name} not found.\n{e}")
