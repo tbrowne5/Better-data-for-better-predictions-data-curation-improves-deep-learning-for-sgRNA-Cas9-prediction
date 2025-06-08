@@ -102,7 +102,7 @@ class models:
         except Exception as e:
             print(f"ERROR: There was an issue during model prediction with the data provided or parameters: batch_size={batch_size}, verbose={verbose}\n{e}")
 
-    def load(self, basename, path="."):
+    def load_model(self, basename, path="."):
         path = path.strip("/")
         try:
             self.model = k.models.load_model(path + "/model_saves/" + basename + ".keras")
