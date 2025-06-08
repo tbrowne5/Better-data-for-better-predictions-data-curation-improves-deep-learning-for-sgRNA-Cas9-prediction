@@ -9,7 +9,7 @@ class processing:
 
     modelVersionInputLength = {
         "TEVSPCAS9": [37, 3, 14],
-        "WT-SPCAS9": [400, 190, 190],
+        "WT-SPCAS9": [378, 189, 169],
         "ESPCAS9": [300, 140, 140]
         }
 
