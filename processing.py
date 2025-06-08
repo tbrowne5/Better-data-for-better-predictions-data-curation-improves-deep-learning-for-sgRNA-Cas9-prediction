@@ -143,11 +143,14 @@ class processing:
 
         # If output file is not specified, use inputfile name with "_predictions.csv" suffix
         # If neither inputFile nor outputFile is specified, write to "example_predictions.csv"
+        print(f"0{outputFile}")
         if outputFile is None:
             if inputFile is not None:
                 outputFile = inputFile.rsplit('.', 1)[0] + "_predictions.csv"
+                print(f"1{outputFile}")
             else:
                 outputFile = "example_predictions.csv"
+                print(f"2outputFile")
         # Write predictions to a CSV file
         print(outputFile)
         with open(outputFile, 'w') as file:
