@@ -107,9 +107,11 @@ class processing:
         if predictionColumn: return inputSequences, oneHotEncoded, np.array(scores)
         else: return inputSequences, oneHotEncoded, None
 
-    def read_training_data(self, modelName): return self.process_csv(self, self.modelVersionTrainingData[modelName], predictionColumn=True)
+    def read_training_data(self, modelName):
+        return self.process_csv(self, self.modelVersionTrainingData[modelName], predictionColumn=True)
 
-    def read_testing_data(self, modelName): return self.process_csv(self, self.modelVersionTestingData[modelName], predictionColumn=True)
+    def read_testing_data(self, modelName):
+        return self.process_csv(self, self.modelVersionTestingData[modelName], predictionColumn=True)
 
     def read_input(self, modelName, inputFile, compare, circular=True):
 
