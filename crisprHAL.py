@@ -64,6 +64,7 @@ def run_model():
         print("Training model")
         trainingData = process.read_training_data(modelName)
         testingData = process.read_testing_data(modelName)
+        if epochs is None: epochs = process.modelVersionDefaultEpochs[modelName]
         model.train(trainingData[1], trainingData[2], epochs)
         process.compare_predictions(model.predict(testingData[1]), testingData[2])
     else:
