@@ -139,7 +139,7 @@ class processing:
         print(f"Spearman correlation: {spearman_corr:.4f}")
         print(f"Pearson correlation: {pearson_corr:.4f}")
     
-    def write_predictions(inputSequences, predictions, outputFile=None, inputFile=None, inputScores=None):
+    def write_predictions(self, inputSequences, predictions, outputFile=None, inputFile=None, inputScores=None):
 
         # If output file is not specified, use inputfile name with "_predictions.csv" suffix
         # If neither inputFile nor outputFile is specified, write to "example_predictions.csv"
