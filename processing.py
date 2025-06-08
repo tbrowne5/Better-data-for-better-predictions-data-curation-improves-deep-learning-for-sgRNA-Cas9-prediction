@@ -14,9 +14,9 @@ class processing:
         }
 
     modelVersionPath = {
-        "TEVSPCAS9": "models/TevSpCas9.h5",
-        "ESPCAS9": "models/eSpCas9.h5",
-        "WT-SPCAS9": "models/WT-SpCas9.h5"
+        "TEVSPCAS9": "models/TevSpCas9.keras",
+        "ESPCAS9": "models/eSpCas9.keras",
+        "WT-SPCAS9": "models/WT-SpCas9.keras"
         }
 
     modelVersionTrainingData = {
