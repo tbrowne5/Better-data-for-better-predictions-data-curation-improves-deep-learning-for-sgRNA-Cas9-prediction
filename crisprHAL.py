@@ -71,6 +71,7 @@ def run_model():
         # Model name provides input sequence length for processing
         # If inputFile default of "None" is passed, the hold-out test set will be used instead
         # The compare flag indicates that the input file contains a second column of scores to be used for comparison
+        if inputFile is None: compare = True
         print(f"{modelName} {inputFile} {compare} {circularInput}")
         inputSequences, encodedInputSequences, inputScores = process.read_input(modelName, inputFile, compare, circularInput)
         print(len(inputSequences))
