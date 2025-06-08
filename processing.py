@@ -9,8 +9,8 @@ class processing:
 
     modelVersionInputLength = {
         "TEVSPCAS9": [37, 3, 14],
-        "WT-SPCAS9": [378, 189, 169],
-        "ESPCAS9": [300, 140, 140]
+        "ESPCAS9": [406, 193, 193],
+        "WT-SPCAS9": [378, 189, 169]
         }
 
     modelVersionPath = {
@@ -32,9 +32,9 @@ class processing:
         }
 
     modelVersionDefaultEpochs = {
-        "TEVSPCAS9": 50,
-        "ESPCAS9": 50,
-        "WT-SPCAS9": 50
+        "TEVSPCAS9": 85,
+        "ESPCAS9": 74,
+        "WT-SPCAS9": 48
         }
 
     def onehotencode(self, nucleotideEncoding):
