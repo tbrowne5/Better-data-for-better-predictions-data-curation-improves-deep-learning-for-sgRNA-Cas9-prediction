@@ -77,7 +77,7 @@ def run_model():
         print(encodedInputSequences.shape)
         model.load_model(modelName)
         predictions= model.predict(encodedInputSequences)
-        print(predictions.shape)
+        #print(predictions.shape)
         print(outputFile)
         print(inputFile)
         if compare:
