@@ -2,10 +2,10 @@
 library("ALDEx2")
 library("reshape2")
 
-all_ecoli_sites_found <- read.csv("E_coli_K12_sgRNA_target_sites_318nt.csv",header=FALSE)
+all_ecoli_sites_found <- read.csv("E_coli_K12_sgRNA_target_sites_1118nt.csv",header=FALSE)
 all_ecoli_sites_found$sgRNAs <- all_ecoli_sites_found$V1
 all_ecoli_sites_found$V1 <- NULL
-all_ecoli_sites_found$sgRNA20 <- substring(all_ecoli_sites_found[,1],141,160)
+all_ecoli_sites_found$sgRNA20 <- substring(all_ecoli_sites_found[,1],541,560)
 
 Citro_tevspcas9 <- read.csv("E_coli_eSpCas9_counts.tsv",sep="\t",header=TRUE,row.names=1)
 
@@ -59,6 +59,6 @@ for (cutoff in min_epi300_cutoff:max_epi300_cutoff){
   } else {
     scaling <- "Unscaled"
   }
-  dir.create(paste(dataName,"_318NT_",scaling,sep=''))
-  write.csv(Citro_tevspcas9_aldex.diff[,c(2,6)],paste(dataName,"_318NT_",scaling,"/",dataName,"_318NT_",scaling,".csv", sep=''),quote=FALSE, row.names=FALSE)
+  dir.create(paste(dataName,"_1118NT_",scaling,sep=''))
+  write.csv(Citro_tevspcas9_aldex.diff[,c(2,6)],paste(dataName,"_1118NT_",scaling,"/",dataName,"_318NT_",scaling,".csv", sep=''),quote=FALSE, row.names=FALSE)
 }
