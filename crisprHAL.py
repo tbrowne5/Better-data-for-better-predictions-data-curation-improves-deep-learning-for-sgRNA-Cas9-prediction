@@ -49,7 +49,7 @@ def parse_args(args):
             print("  --compare, -c                                  Compare predictions with scores in the input file second column")
             print("  --train, -t                                    Train the model specified")
             print("  --epochs, -e  [Integer epoch value]            Specify number of epochs for training (default: model-specific)")
-            print("  --help, -h                                    Show this help message")
+            print("  --help, -h                                     Show this help message")
             sys.exit(0)
     
     if training == True and inputFile is not None:
