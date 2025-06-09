@@ -73,8 +73,7 @@ def run_model():
         if epochs is None: epochs = modelVersionDefaultEpochs[modelName]
         for i in range(0,epochs):
             model.train(trainingData[1], trainingData[2], epochs=1, batch_size=1024, verbose=1)
-            print(f"Epoch {i+1} performance on hold-out test set:")
-            process.compare_predictions(model.predict(testingData[1]), testingData[2])
+            process.compare_predictions(model.predict(testingData[1]), testingData[2], message=f"Epoch {i+1} of {epochs} for model {modelName}")
     else:
         # Model name provides input sequence length for processing
         # If inputFile default of "None" is passed, the hold-out test set will be used instead
