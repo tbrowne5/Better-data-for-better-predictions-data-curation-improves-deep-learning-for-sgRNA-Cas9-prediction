@@ -7,50 +7,49 @@ all_ecoli_sites_found$sgRNAs <- all_ecoli_sites_found$V1
 all_ecoli_sites_found$V1 <- NULL
 all_ecoli_sites_found$sgRNA20 <- substring(all_ecoli_sites_found[,1],541,560)
 
-Citro_tevspcas9 <- read.csv("E_coli_WTSpCas9_counts.tsv",sep="\t",header=TRUE,row.names=1)
-nrow(Citro_tevspcas9)
-Citro_tevspcas9 <- Citro_tevspcas9[,c(3,4,1,2)]
-Citro_tevspcas9 <- Citro_tevspcas9[which(row.names(Citro_tevspcas9) %in% all_ecoli_sites_found$sgRNA20),]
-nrow(Citro_tevspcas9)
+WTSpCas9 <- read.csv("E_coli_WTSpCas9_counts.tsv",sep="\t",header=TRUE,row.names=1)
+nrow(WTSpCas9)
+WTSpCas9 <- WTSpCas9[,c(3,4,1,2)]
+WTSpCas9 <- WTSpCas9[which(row.names(WTSpCas9) %in% all_ecoli_sites_found$sgRNA20),]
+nrow(WTSpCas9)
 
 outputLabel <- "Guo_SpCas9_Curated_Min_dCas"
 replicates <- 2
 seedval <- 123
 scaled <- FALSE
 
-min_epi300_cutoff <- 1
-max_epi300_cutoff <- 2
-original_nrow <- nrow(Citro_tevspcas9)
+min_dCas_cutoff <- 1
+max_dCas_cutoff <- 100
+original_nrow <- nrow(WTSpCas9)
 
-metadata <- data.frame(cutoffVal = numeric(max_epi300_cutoff), sgRNAs = numeric(max_epi300_cutoff), proportionVsOne = numeric(max_epi300_cutoff), stringsAsFactors = FALSE)
+metadata <- data.frame(cutoffVal = numeric(max_dCas_cutoff), sgRNAs = numeric(max_dCas_cutoff), proportionVsOne = numeric(max_dCas_cutoff), stringsAsFactors = FALSE)
 cutoffOneVal <- 0
 
-for (cutoff in min_epi300_cutoff:max_epi300_cutoff){
+for (cutoff in min_dCas_cutoff:max_dCas_cutoff){
   print(original_nrow)
-  Citro_tevspcas9 <- Citro_tevspcas9[which(((Citro_tevspcas9$dCas1_NS + Citro_tevspcas9$dCas2_NS)/2) >= cutoff),]
-  print(paste(nrow(Citro_tevspcas9),":",cutoff,sep=""))
+  WTSpCas9 <- WTSpCas9[which(((WTSpCas9$dCas1_NS + WTSpCas9$dCas2_NS)/2) >= cutoff),]
+  print(paste(nrow(WTSpCas9),":",cutoff,sep=""))
   conds <- c(rep("S",replicates),rep("NS",replicates))
   
   if(scaled){
     set.seed(seedval)
-    Citro_tevspcas9_aldex.diff <- ALDEx2::aldex.clr(Citro_tevspcas9,conds, gamma=0.5)
+    WTSpCas9_aldex.diff <- ALDEx2::aldex.clr(WTSpCas9,conds, gamma=0.5)
   } else {
     set.seed(seedval)
-    Citro_tevspcas9_aldex.diff <- ALDEx2::aldex.clr(Citro_tevspcas9,conds)
+    WTSpCas9_aldex.diff <- ALDEx2::aldex.clr(WTSpCas9,conds)
   }
-  Citro_tevspcas9_aldex.diff <- ALDEx2::aldex.effect(Citro_tevspcas9_aldex.diff)
-  Citro_tevspcas9_aldex.diff <- merge(all_ecoli_sites_found, Citro_tevspcas9_aldex.diff,by.x=2,by.y=0)
-  Citro_tevspcas9_aldex.diff <- Citro_tevspcas9_aldex.diff[!duplicated(Citro_tevspcas9_aldex.diff$sgRNAs),]
-  print(nrow(Citro_tevspcas9_aldex.diff))
+  WTSpCas9_aldex.diff <- ALDEx2::aldex.effect(WTSpCas9_aldex.diff)
+  WTSpCas9_aldex.diff <- merge(all_ecoli_sites_found, WTSpCas9_aldex.diff,by.x=2,by.y=0)
+  WTSpCas9_aldex.diff <- WTSpCas9_aldex.diff[!duplicated(WTSpCas9_aldex.diff$sgRNAs),]
+  print(nrow(WTSpCas9_aldex.diff))
 
-  row.names(Citro_tevspcas9_aldex.diff) <- Citro_tevspcas9_aldex.diff$sgRNAs
+  row.names(WTSpCas9_aldex.diff) <- WTSpCas9_aldex.diff$sgRNAs
   
-  if(cutoff == min_epi300_cutoff){
-    cutoffOneVal <- nrow(Citro_tevspcas9_aldex.diff)
+  if(cutoff == min_dCas_cutoff){
+    cutoffOneVal <- nrow(WTSpCas9_aldex.diff)
   }
-  metadata[cutoff,] <- c(cutoff, nrow(Citro_tevspcas9_aldex.diff), (nrow(Citro_tevspcas9_aldex.diff)/cutoffOneVal))
+  metadata[cutoff,] <- c(cutoff, nrow(WTSpCas9_aldex.diff), (nrow(WTSpCas9_aldex.diff)/cutoffOneVal))
   
-  # Label
   if(cutoff == 0){
     dataName <- outputLabel
   } else {
@@ -62,5 +61,5 @@ for (cutoff in min_epi300_cutoff:max_epi300_cutoff){
     scaling <- "Unscaled"
   }
   dir.create(paste(dataName,"_1118NT_",scaling,sep=''))
-  write.csv(Citro_tevspcas9_aldex.diff[,c(2,6)],paste(dataName,"_1118NT_",scaling,"/",dataName,"_1118NT_",scaling,".csv", sep=''),quote=FALSE, row.names=FALSE)
+  write.csv(WTSpCas9_aldex.diff[,c(2,6)],paste(dataName,"_1118NT_",scaling,"/",dataName,"_1118NT_",scaling,".csv", sep=''),quote=FALSE, row.names=FALSE)
 }
