@@ -21,7 +21,9 @@ If you wish to run the model on your own nucleotide sequence follow parts 0 to 3
 
 If you wish to validate the model or to update the model with your own data, follow parts 4 to 5.
 
-As this repository contains the most up-to-date models, if you wish to test a model from a specific paper, please use the paper-specific repository link listed above.
+Datasets and raw data can be found in the "data" directory. Figure generation code can be found in the "figure" directory.
+
+**Please be advised:** As this repository contains the most up-to-date models, if you wish to test a model from a specific paper, please use the paper-specific repository link listed above.
 
 ## Sections of this guide:
 
