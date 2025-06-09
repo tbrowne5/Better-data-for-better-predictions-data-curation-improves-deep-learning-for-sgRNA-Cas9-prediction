@@ -17,7 +17,7 @@ seedval <- 123
 scaled <- FALSE
 
 min_epi300_cutoff <- 1
-max_epi300_cutoff <- 250
+max_epi300_cutoff <- 100
 original_nrow <- nrow(Citro_tevspcas9)
 
 metadata <- data.frame(cutoffVal = numeric(max_epi300_cutoff), sgRNAs = numeric(max_epi300_cutoff), proportionVsOne = numeric(max_epi300_cutoff), stringsAsFactors = FALSE)
