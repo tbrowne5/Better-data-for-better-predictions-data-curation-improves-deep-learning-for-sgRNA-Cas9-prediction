@@ -2,7 +2,7 @@
 library("ALDEx2")
 library("reshape2")
 
-all_ecoli_sites_found <- read.csv("E_coli_K12_sgRNA_target_sites_1118nt.csv",header=FALSE)
+all_ecoli_sites_found <- bind_rows(read.csv("E_coli_sgRNA_target_sites_part_1.csv",header=FALSE),read.csv("E_coli_sgRNA_target_sites_part_2.csv",header=FALSE),read.csv("E_coli_sgRNA_target_sites_part_3.csv",header=FALSE))
 all_ecoli_sites_found$sgRNAs <- all_ecoli_sites_found$V1
 all_ecoli_sites_found$V1 <- NULL
 all_ecoli_sites_found$sgRNA20 <- substring(all_ecoli_sites_found[,1],541,560)

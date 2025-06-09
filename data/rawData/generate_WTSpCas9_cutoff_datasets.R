@@ -2,10 +2,10 @@
 library("ALDEx2")
 library("reshape2")
 
-all_ecoli_sites_found <- read.csv("E_coli_K12_sgRNA_target_sites_1118nt.csv",header=FALSE)
+all_ecoli_sites_found <- bind_rows(read.csv("E_coli_sgRNA_target_sites_part_1.csv",header=FALSE),read.csv("E_coli_sgRNA_target_sites_part_2.csv",header=FALSE),read.csv("E_coli_sgRNA_target_sites_part_3.csv",header=FALSE))
 all_ecoli_sites_found$sgRNAs <- all_ecoli_sites_found$V1
 all_ecoli_sites_found$V1 <- NULL
-all_ecoli_sites_found$sgRNA20 <- substring(all_ecoli_sites_found[,1],141,160)
+all_ecoli_sites_found$sgRNA20 <- substring(all_ecoli_sites_found[,1],541,560)
 
 Citro_tevspcas9 <- read.csv("E_coli_WTSpCas9_counts.tsv",sep="\t",header=TRUE,row.names=1)
 nrow(Citro_tevspcas9)
@@ -19,7 +19,7 @@ seedval <- 123
 scaled <- FALSE
 
 min_epi300_cutoff <- 1
-max_epi300_cutoff <- 100
+max_epi300_cutoff <- 2
 original_nrow <- nrow(Citro_tevspcas9)
 
 metadata <- data.frame(cutoffVal = numeric(max_epi300_cutoff), sgRNAs = numeric(max_epi300_cutoff), proportionVsOne = numeric(max_epi300_cutoff), stringsAsFactors = FALSE)
