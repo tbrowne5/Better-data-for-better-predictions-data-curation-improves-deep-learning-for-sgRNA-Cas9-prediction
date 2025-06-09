@@ -54,6 +54,6 @@ for (cutoff in 1:max_epi300_cutoff){
   } else {
     scaling <- "Unscaled"
   }
-  dir.create(paste("ALDEx_Standard/diffbtw/",dataName,"_long_",scaling,sep=''))
-  write.csv(Citro_tevspcas9_aldex.diff[,c(2,6)],paste("ALDEx_Standard/diffbtw/",dataName,"_long_",scaling,"/",dataName,"_long_",scaling,".csv", sep=''),quote=FALSE, row.names=FALSE)
+  dir.create(paste(dataName,"_long_",scaling,sep=''))
+  write.csv(Citro_tevspcas9_aldex.diff[,c(2,6)],paste(dataName,"_long_",scaling,"/",dataName,"_long_",scaling,".csv", sep=''),quote=FALSE, row.names=FALSE)
 }

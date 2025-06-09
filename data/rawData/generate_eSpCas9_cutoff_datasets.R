@@ -7,7 +7,7 @@ all_ecoli_sites_found$sgRNAs <- all_ecoli_sites_found$V1
 all_ecoli_sites_found$V1 <- NULL
 all_ecoli_sites_found$sgRNA20 <- substring(all_ecoli_sites_found[,1],141,160)
 
-Citro_tevspcas9 <- read.csv("E_coli_eSpCas9_counts.txt",sep="\t",header=TRUE,row.names=1)
+Citro_tevspcas9 <- read.csv("E_coli_eSpCas9_counts.tsv",sep="\t",header=TRUE,row.names=1)
 
 Citro_tevspcas9 <- Citro_tevspcas9[,c(3,4,1,2)]
 
