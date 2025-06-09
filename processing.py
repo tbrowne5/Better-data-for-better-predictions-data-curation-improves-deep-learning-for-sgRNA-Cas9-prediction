@@ -97,7 +97,7 @@ class processing:
         else:
             raise ValueError("Unsupported file format, please provide an input of the format: .fasta, .fa, .csv, or .tsv")
     
-    def compare_predictions(self, predictions, actual):
+    def compare_predictions(self, predictions, actual, returnScores=False, message=None):
         
         if len(predictions) != len(actual):
             raise ValueError("Predictions and actual scores must have the same length.")
@@ -107,8 +107,12 @@ class processing:
         spearman_corr, _ = spearmanr(predictions, actual, axis=0)
         pearson_corr, _ = pearsonr(predictions, actual, axis=0)
 
+        if message is not None: print(message)
+
         print(f"Spearman correlation: {spearman_corr:.4f}")
         print(f"Pearson correlation: {pearson_corr:.4f}")
+
+        if returnScores: return spearman_corr, pearson_corr
     
     def write_predictions(self, inputSequences, predictions, outputFile=None, inputFile=None, inputScores=None):
 
