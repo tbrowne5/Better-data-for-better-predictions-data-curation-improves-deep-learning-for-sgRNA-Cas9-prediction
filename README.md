@@ -115,6 +115,16 @@ Help: prints available options.
 
 ## 3: Predict with the model
 
+To run a test of the model's predictions, please run the command:
+```
+python crisprHAL.py -m TevSpCas9 -i sample.fa
+```
+This will: 1) Identify all sgRNA targets in the sample.fa file, 2) Predict Cas9 activity for each target, and 3) Write the targets and predicted activities to a file called sample_predictions.txt
+
+The full list of options for FASTA input-based model are:
+```
+python crisprHAL.py --model [TevSpCas9/eSpCas9/WT-SpCas9] --input [input file path] --output [optional output file path] --circular
+```
 
 ## 4: Preparing your own input CSV Files
 
