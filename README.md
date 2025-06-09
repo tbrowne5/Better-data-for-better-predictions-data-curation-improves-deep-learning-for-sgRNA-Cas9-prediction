@@ -80,36 +80,36 @@ Success here is that the model runs without error, showing that it is installed 
 python crisprHAL.py [options]
 ```
 ```
---model, -m   [TevSpCas9, eSpCas9, WT-SpCas9]  Specify the model name (default: TevSpCas9)
+--model, -m   [TevSpCas9, eSpCas9, WT-SpCas9]
 ```
 Model (default=TevSpCas9): specify the model to be used. TevSpCas9 should be used for both TevSpCas9 and SpCas9 predictions. WT-SpCas9 should only be used for crisprHAL WT validation.
 ```
---input, -i   [Input file path]                Input file for prediction (fasta, csv, or tsv)
+--input, -i   [Input file path]
 ```
 Input: crisprHAL accepts three types of input files: FASTA (.fasta and .fa), CSV (.csv), and TSV (.tsv). If no input is specified, the model will default to testing on its respective hold-out set.
 
 ```
---output, -o  [Output file path]               Output file for prediction results
+--output, -o  [Output file path]
 ```
 Output: specify the output path and file name of choice. If no output is specified, output file will have the input file name with the prefix: "_predictions.txt"
 ```
---circular                                     Process fasta as a circular input sequence
+--circular
 ```
 Circular (default=FALSE): specific to FASTA inputs; specifies that the input sequence should be treated as circular DNA rather than linear.
 ```
---compare, -c                                  Compare predictions with scores in the input file second column
+--compare, -c
 ```
 Compare (default=FALSE): specific to CSV/TSV inputs; specifies that the input file contains a second column with scores for comparison. Outputs Spearman and Pearson correlation coefficients between predictions and provided scores, and writes both the predictions and scores to the output file.
 ```
---train, -t                                    Train the model specified
+--train, -t
 ```
 Train (default=FALSE): train the model specified by ```--model/-m [modelName]``` (default=TevSpCas9) using the corresponding training dataset in the data/ directory.
 ```
---epochs, -e  [Integer epoch value]            Specify number of epochs for training (default: model-specific)
+--epochs, -e  [Integer epoch value]
 ```
-Epochs: specify the number of training epochs to be run when training the model. By default each model uses its respective 5CV-identified epochs.
+Epochs: specify the number of training epochs to be run when training the model. By default each model uses its respective 5CV-identified epochs. Without the ```--train/-t``` flag, ```--epochs/-e``` will do nothing.
 ```
---help, -h                                     Show this help message
+--help, -h
 ```
 Help: prints available options.
 
