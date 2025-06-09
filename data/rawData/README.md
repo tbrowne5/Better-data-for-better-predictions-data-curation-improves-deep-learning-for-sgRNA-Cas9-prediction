@@ -5,7 +5,7 @@
 
 All datasets were generated using: R version 4.3.2
 
-### The data available here:
+### The Data Available Here:
 * *C. rodentium* TevSpCas9 sequencing count file with corresponding sgRNA targets
 * *C. rodentium* TevSpCas9 target sites with 20 nucleotides upstream and 38 nucleotides (PAM+35) downstream
 * *E. coli* eSpCas9 sequencing counts with corresponding sgRNA targets
