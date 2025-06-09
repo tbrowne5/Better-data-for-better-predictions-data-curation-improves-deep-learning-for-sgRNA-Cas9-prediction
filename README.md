@@ -35,10 +35,10 @@ If you wish to simply obtain predictions, you can do so easily through the [cris
 
 ## Sections of this guide:
 
-Setting up and running the model to predict sgRNA activities:
+Setting up and running the model to predict sgRNA/Cas9 activities:
 * 0: Model requirements ```Time: 1-10 minutes```
 * 1: Running the model test ```Runtime: 10 seconds```
-* 2: Processing nucleotide sequences into model inputs ```Runtime: Varible```
+* 2: Understanding available model options
 * 3: Predicting with the model ```Runtime: 1-10 seconds```
 
 Additional information and methods: 
@@ -66,13 +66,15 @@ conda install --file requirements.txt
 
 This installation has been tested in Ubuntu 20.04.4 and Mac OSX 10.14.5, but has not been tested on Windows.
 
-## 1: Run model test
+
+## 1: Run the model test
 ```
 python crisprHAL.py
 ```
 Test our primary SpCas9/TevSpCas9 prediction model: crisprHAL Tev
 
 Success here is that the model runs without error, showing that it is installed correctly. ```Runtime: ~10 seconds```
+
 
 ## 2: Understand options
 
@@ -113,6 +115,7 @@ Epochs: specify the number of training epochs to be run when training the model.
 ```
 Help: prints available options.
 
+
 ## 3: Predict with the model
 
 To run a test of the model's predictions, please run the command:
@@ -121,10 +124,11 @@ python crisprHAL.py -m TevSpCas9 -i sample.fa
 ```
 This will: 1) Identify all sgRNA targets in the sample.fa file, 2) Predict Cas9 activity for each target, and 3) Write the targets and predicted activities to a file called sample_predictions.txt
 
-The full list of options for FASTA input-based model are:
+The full list of options for FASTA input-based model predictions are:
 ```
 python crisprHAL.py --model [TevSpCas9/eSpCas9/WT-SpCas9] --input [input file path] --output [optional output file path] --circular
 ```
+
 
 ## 4: Preparing your own input CSV Files
 
@@ -156,25 +160,11 @@ TCGATTGAGGGGCTGGGAATGGGTGATC,41.2590972746
 CCGTGTAAGGGAGATTACACAGGCTAAG,4.25926295656
 ```
 
+
 ## 5: Validate the training of the model
 
 This will assess whether the training model is working. It will not change the model used for predictions.
 
-Perform 5-fold cross validation with the TevSpCas9 dataset transfer learning from the eSpCas9 base model: ```Runtime: ~20 seconds```
-```
-python crisprHAL.py train TevSpCas9
-```
-
-Perform 5-fold cross validation with the SpCas9 dataset transfer learning from the eSpCas9 base model: ```Runtime: ~20 seconds```
-```
-python crisprHAL.py train SpCas9
-```
-
-Perform 80:20 train-test split with the eSpCas9 dataset (Guo et al. 2018) used as the base model\*: ```Runtime: 1-10 minutes```
-```
-python crisprHAL.py train eSpCas9
-```
-\*An 80% training & 20% test split was used for base model generation, and therefore has been included in place of the 5-fold cross validation tests used for the TevSpCas9 and SpCas9 enzyme transfer learning-based models.
 
 ## 6: Data availability and processing
 
