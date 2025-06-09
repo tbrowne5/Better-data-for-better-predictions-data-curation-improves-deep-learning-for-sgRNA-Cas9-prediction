@@ -5,7 +5,7 @@ os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 os.environ["TF_GPU_ALLOCATOR"] = "cuda_malloc_async" # may need: export TF_GPU_ALLOCATOR=cuda_malloc_async
 
-from model import models
+from model import models, modelVersionDefaultEpochs
 from processing import processing
 
 training = False
@@ -64,13 +64,13 @@ def run_model():
     global training, modelName, inputFile, outputFile, compareFile, epochs, circularInput
 
     process = processing()
-    model = models(modelName, process.modelVersionInputLength[modelName][0], summary)
+    model = models(modelName, summary)
     
     if training:
         print("Training model")
         trainingData = process.read_training_data(modelName)
         testingData = process.read_testing_data(modelName)
-        if epochs is None: epochs = process.modelVersionDefaultEpochs[modelName]
+        if epochs is None: epochs = modelVersionDefaultEpochs[modelName]
         for i in range(0,epochs):
             model.train(trainingData[1], trainingData[2], epochs=1, batch_size=1024, verbose=1)
             print(f"Epoch {i+1} performance on hold-out test set:")

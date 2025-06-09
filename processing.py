@@ -1,41 +1,12 @@
 
 import numpy as np
 from scipy.stats import spearmanr, pearsonr
+from model import modelVersionInputLength, modelVersionTrainingData, modelVersionTestingData
 
 class processing:
     
     def __init__(self):
         pass
-
-    modelVersionInputLength = {
-        "TEVSPCAS9": [37, 3, 14],
-        "ESPCAS9": [406, 193, 193],
-        "WT-SPCAS9": [378, 189, 169]
-        }
-
-    modelVersionPath = {
-        "TEVSPCAS9": "models/TevSpCas9.keras",
-        "ESPCAS9": "models/eSpCas9.keras",
-        "WT-SPCAS9": "models/WT-SpCas9.keras"
-        }
-
-    modelVersionTrainingData = {
-        "TEVSPCAS9": "data/TevSpCas9_training_data.csv",
-        "ESPCAS9": "data/eSpCas9_training_data.csv",
-        "WT-SPCAS9": "data/WT-SpCas9_training_data.csv"
-        }
-
-    modelVersionTestingData = {
-        "TEVSPCAS9": "data/TevSpCas9_testing_data.csv",
-        "ESPCAS9": "data/eSpCas9_testing_data.csv",
-        "WT-SPCAS9": "data/WT-SpCas9_testing_data.csv"
-        }
-
-    modelVersionDefaultEpochs = {
-        "TEVSPCAS9": 85,
-        "ESPCAS9": 74,
-        "WT-SPCAS9": 48
-        }
 
     def onehotencode(self, nucleotideEncoding):
         
@@ -107,19 +78,19 @@ class processing:
         else: return inputSequences, oneHotEncoded, None
 
     def read_training_data(self, modelName):
-        return self.process_csv(self.modelVersionTrainingData[modelName], predictionColumn=True)
+        return self.process_csv(modelVersionTrainingData[modelName], predictionColumn=True)
 
     def read_testing_data(self, modelName):
-        return self.process_csv(self.modelVersionTestingData[modelName], predictionColumn=True)
+        return self.process_csv(modelVersionTestingData[modelName], predictionColumn=True)
 
     def read_input(self, modelName, inputFile, compare, circular=True):
 
         # If no parameters specified, the program will provide hold-out testing data performance
         if inputFile == None:
-            return self.process_csv(self.modelVersionTestingData[modelName], predictionColumn=True)
+            return self.process_csv(modelVersionTestingData[modelName], predictionColumn=True)
         # Recommended input format for model use (no fiddling with input sequence lengths)
         elif inputFile.endswith('.fasta') or inputFile.endswith('.fa'):
-            return self.process_fasta(inputFile, self.modelVersionInputLength[modelName], circular)
+            return self.process_fasta(inputFile, modelVersionInputLength[modelName], circular)
         # Method for validating model performance, requires explicit input sequence lengths
         elif inputFile.endswith('.csv') or inputFile.endswith('.tsv'):
             return self.process_csv(inputFile, predictionColumn=compare)

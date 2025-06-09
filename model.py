@@ -5,13 +5,43 @@ from tensorflow.keras.layers import Input, Dense, Conv1D, MaxPooling1D, Conv2D, 
 from tensorflow.keras.models import Model
 #from keras_gradient_noise import add_gradient_noise
 
+modelVersionInputLength = {
+    "TEVSPCAS9": [37, 3, 14],
+    "ESPCAS9": [406, 193, 193],
+    "WT-SPCAS9": [378, 189, 169]
+    }
+
+modelVersionPath = {
+    "TEVSPCAS9": "models/TevSpCas9.keras",
+    "ESPCAS9": "models/eSpCas9.keras",
+    "WT-SPCAS9": "models/WT-SpCas9.keras"
+    }
+
+modelVersionTrainingData = {
+    "TEVSPCAS9": "data/TevSpCas9_training_data.csv",
+    "ESPCAS9": "data/eSpCas9_training_data.csv",
+    "WT-SPCAS9": "data/WT-SpCas9_training_data.csv"
+    }
+
+modelVersionTestingData = {
+    "TEVSPCAS9": "data/TevSpCas9_testing_data.csv",
+    "ESPCAS9": "data/eSpCas9_testing_data.csv",
+    "WT-SPCAS9": "data/WT-SpCas9_testing_data.csv"
+    }
+
+modelVersionDefaultEpochs = {
+    "TEVSPCAS9": 85,
+    "ESPCAS9": 74,
+    "WT-SPCAS9": 48
+    }
+
 class models:
 
     optimizer_selection=0
     nucleotide_dimensions=0
     compile_options={"optimizer": "unset", "loss": "unset"}
     
-    def __init__(self, model_name, input_length, summary, nt_dims=4, optimizer="adam", learning_rate=0.0005, loss_function="mean_squared_error", drop_rate=0.3,CNN_filters=128, window_size=3, CNN_drop=0.3, conv1D_padding="same", CNN_dense1=128, CNN_dense2=64, maxpool1D_padding="same", RNN_size=128, RNN_dense1=128, RNN_dense2=64, CNN_RNN_drop=0.3):
+    def __init__(self, model_name, summary, nt_dims=4, optimizer="adam", learning_rate=0.0005, loss_function="mean_squared_error", drop_rate=0.3,CNN_filters=128, window_size=3, CNN_drop=0.3, conv1D_padding="same", CNN_dense1=128, CNN_dense2=64, maxpool1D_padding="same", RNN_size=128, RNN_dense1=128, RNN_dense2=64, CNN_RNN_drop=0.3):
         
         print("\nINITIALIZATION OF MODELS\n")
         try:
@@ -21,7 +51,7 @@ class models:
             print(f"ERROR: Optimizer name {optimizer} not found or learning rate {learning_rate} not supported.\n{e}")
         try:
             self.nucleotide_dimensions=nt_dims
-            self.model = self.build_crisprHAL_GPU(input_length, drop_rate, CNN_filters, window_size, CNN_drop, conv1D_padding, CNN_dense1, CNN_dense2, maxpool1D_padding, RNN_size, RNN_dense1, RNN_dense2, CNN_RNN_drop)
+            self.model = self.build_crisprHAL_GPU(modelVersionInputLength[model_name][0], drop_rate, CNN_filters, window_size, CNN_drop, conv1D_padding, CNN_dense1, CNN_dense2, maxpool1D_padding, RNN_size, RNN_dense1, RNN_dense2, CNN_RNN_drop)
             if summary: self.model.summary()
             print("\n" + model_name + " model loaded.\n")
         except Exception as e:
