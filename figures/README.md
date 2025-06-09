@@ -5,7 +5,7 @@ All required R code to regenerate figures 3-6. Figures 1 and 2 were not construc
 
 All figures were generated using: R version 4.3.2
 
-### R Packages:
+### Required R Packages:
 * dplyr
 * ggplot2
 * tidyverse
