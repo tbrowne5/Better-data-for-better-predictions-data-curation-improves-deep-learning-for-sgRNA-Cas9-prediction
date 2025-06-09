@@ -1,13 +1,13 @@
 
-setwd("/Users/Tyler/Desktop/working-repositories/Better-data-for-better-predictions-data-curation-improves-deep-learning-for-sgRNA-Cas9-prediction/figures")
+# Required Packages
 
-# Figure 3 -- Cutoff plots
-# Cutoff versus top 5 epoch performance
 library(scales)
 library(dplyr)
 library(ggplot2)
 library(tidyverse)
 library(viridis)
+library(grid)
+library(gridExtra)
 
 get_density <- function(x, y, n = 100, ...) {
   dens <- MASS::kde2d(x, y, n = n, ...)
