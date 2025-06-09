@@ -29,6 +29,8 @@ If you wish to run the model on your own nucleotide sequence follow parts 0 to 3
 
 If you wish to validate the model or to update the model with your own data, follow parts 4 to 5.
 
+If you wish to simply obtain predictions, you can do so easily through the [crisprHAL website](https://crisprHAL.streamlit.app).
+
 **Please be advised:** This is a paper-specific repository, for practical use with the most up-to-date models, please visit the [crisprHAL](https://github.com/tbrowne5/crisprHAL) repository.
 
 ## Sections of this guide:
