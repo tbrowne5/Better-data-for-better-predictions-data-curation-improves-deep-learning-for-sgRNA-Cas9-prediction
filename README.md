@@ -33,7 +33,7 @@ If you wish to simply obtain predictions, you can do so easily through the [cris
 
 **Please be advised:** This is a paper-specific repository, for practical use with the most up-to-date models, please visit the [crisprHAL](https://github.com/tbrowne5/crisprHAL) repository.
 
-## Sections of this guide:
+## SECTIONS OF THIS GUIDE:
 
 Setting up and running the model to predict sgRNA/Cas9 activities:
 * 0: Model requirements ```Time: 1-10 minutes```
