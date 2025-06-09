@@ -15,13 +15,19 @@ Note: this is a static paper-specific repository, and as such, may not contain u
 
 The Cas9 enzyme along with a single guide RNA molecule is a modular tool for genetic engineering and has shown effectiveness as a species-specific anti-microbial. The ability to accurately predict on-target cleavage is critical as activity varies by target. Using the sgRNA nucleotide sequence and an activity score, predictive models have been developed with the best performance resulting from deep learning architectures. Prior work has emphasized robust and novel architectures to improve predictive performance. Here, we explore the impact of a data-centric approach through optimization of the input target site adjacent nucleotide sequence length and the use of data filtering for read counts in the control conditions  to improve input data utility. Using the existing crisprHAL architecture, we develop crisprHAL Tev, a best-in-class bacterial SpCas9 prediction model with performance that generalizes between related species and across data types. During this process, we also rebuild two prior \textit{E. coli} Cas9 datasets, demonstrating the importance of data quality, and resulting in the production of an improved bacterial eSpCas9 prediction model.
 
+## FILES AND DIRECTORIES:
+* data/ contains raw data, model training data, and hold-out test sets
+* figures/ contains the R scripts and data for paper figure generation
+* models/ contains the model saves
+* crisprHAL.py contains the main Python script for model running
+* model.py contains the code for running the models
+* processing.py contains the code for input data processing
+
 ## QUICK START
 
 If you wish to run the model on your own nucleotide sequence follow parts 0 to 3. 
 
 If you wish to validate the model or to update the model with your own data, follow parts 4 to 5.
-
-Datasets and raw data can be found in the "data" directory. Figure generation code can be found in the "figure" directory.
 
 **Please be advised:** As this repository contains the most up-to-date models, if you wish to test a model from a specific paper, please use the paper-specific repository link listed above.
 
@@ -30,8 +36,8 @@ Datasets and raw data can be found in the "data" directory. Figure generation co
 Setting up and running the model to predict sgRNA activities:
 * 0: Model requirements ```Time: 1-10 minutes```
 * 1: Running the model test ```Runtime: 10 seconds```
-* 2: Processing nucleotide sequences into model inputs ```Runtime: 1 second```
-* 3: Predicting with the model ```Runtime: 10 seconds```
+* 2: Processing nucleotide sequences into model inputs ```Runtime: Varible```
+* 3: Predicting with the model ```Runtime: 1-10 seconds```
 
 Additional information and methods: 
 * 4: Preparing your own model input files & comparing predictions
@@ -44,17 +50,8 @@ Additional information and methods:
 
 These are in a file called requirements.txt and should be in the working directory.
 ```
-python>=3.8.8
-numpy==1.19.2
-numpy-base==1.19.2
-biopython==1.78
-h5py==2.10.0
-hdf5==1.10.6
-keras-preprocessing==1.1.2
-pandas==1.2.2
-scikit-learn==0.24.1
-scipy==1.6.1
-tensorflow==2.4.0
+python
+tensorflow
 ```
 
 These can be instantiated within a conda environment: ```Time: 1-10 minutes```
@@ -71,72 +68,56 @@ This installation has been tested in Ubuntu 20.04.4 and Mac OSX 10.14.5, but has
 ```
 python crisprHAL.py
 ```
-Test our TevSpCas9 model with an example SpCas9 dataset of 7821 unique sgRNA target sites from Guo et al. 2018. 
+Test our primary SpCas9/TevSpCas9 prediction model: crisprHAL Tev
 
 Success here is that the model runs without error, showing that it is installed correctly. ```Runtime: ~10 seconds```
 
+## 2: Understand options
 
-
-## 2: Process a fasta file of nucleotide sequence(s) into sgRNA target model inputs
-
-This will take an input nucleotide fasta file and identifies potential sgRNA sequences for evaluation. The output will be
-a .csv file containing the predicted guides. This can be used as input for the prediction step. ```Runtime: ~1 second```
-
-* **Input Nucleotide File**: One single-line or multi-line fasta-formatted nucleotide sequence starting with a ">IDENTIFIER"
-* **Output**: 28 nucleotide sequences in a CSV file appropriate as an input to the model
-
-Composition of the 28 nucleotide inputs:
-* 20 nucleotide target site, ie: CTCGATTGAGGGGCTGGGAA
-* 3 nucleotide NGG PAM, ie: TGG
-* 5 nucleotides downstream, ie: GTGAT
-* Total: CTCGATTGAGGGGCTGGGAATGGGTGAT
-
-Example input file and run shown below with a phiX174 genome:
 ```
->Sequence1
-TCGAGCATGCATCTAGAGGGCCCAATTCGCCCTATAGTGAGTCGTATTACAATTCACTGGCCGTCGTTTTACAACGTCGTGACTGGGAAAACCC
-...etc
-
-# python process_fasta.py [Input Nucleotide File] [Output CSV File]
-python process_fasta.py phiX174.fna phiX174_sgRNAs.csv
-
-#output: phiX174_output.csv
+python crisprHAL.py [options]
 ```
-
-## 3: Predict with model
-
-This will take the file of the predicted sgRNA sequences from above and assign a score. Higher scores are better!
-The output is a .csv file named OUTPUT_[inputfile] and contains the sgRNA and the score. ```Runtime: ~10 seconds [+2-4 seconds/10,000 sites]```
-
-* **Enzyme**: "TevSpCas9" or "SpCas9"
-* **Input**: CSV file input name; created in section 2 or matching the required format (Format: Section 4)
-* **Optional Compare**: "Compare" if your CSV file contains scores for comparison to model predictions (Format: Section 4)
-* **Output**: Tab-deliminated (TSV) file containing the 28 nucleotide sequence and predicted Cas9 activity value
-
-Example run with the phiX174 predicted sgRNA seqeunces
 ```
-# python crisprHAL.py [Enzyme] [Input file csv] [Optional compare]
-python crisprHAL.py TevSpCas9  phiX174_sgRNAs.csv
-# output: OUTPUT_phiX174_sgRNAs.csv
+--model, -m   [TevSpCas9, eSpCas9, WT-SpCas9]  Specify the model name (default: TevSpCas9)
 ```
+Model (default=TevSpCas9): specify the model to be used. TevSpCas9 should be used for both TevSpCas9 and SpCas9 predictions. WT-SpCas9 should only be used for crisprHAL WT validation.
+```
+--input, -i   [Input file path]                Input file for prediction (fasta, csv, or tsv)
+```
+Input: crisprHAL accepts three types of input files: FASTA (.fasta and .fa), CSV (.csv), and TSV (.tsv). If no input is specified, the model will default to testing on its respective hold-out set.
 
+```
+--output, -o  [Output file path]               Output file for prediction results
+```
+Output: specify the output path and file name of choice. If no output is specified, output file will have the input file name with the prefix: "_predictions.txt"
+```
+--circular                                     Process fasta as a circular input sequence
+```
+Circular (default=FALSE): specific to FASTA inputs; specifies that the input sequence should be treated as circular DNA rather than linear.
+```
+--compare, -c                                  Compare predictions with scores in the input file second column
+```
+Compare (default=FALSE): specific to CSV/TSV inputs; specifies that the input file contains a second column with scores for comparison. Outputs Spearman and Pearson correlation coefficients between predictions and provided scores, and writes both the predictions and scores to the output file.
+```
+--train, -t                                    Train the model specified
+```
+Train (default=FALSE): train the model specified by ```--model/-m [modelName]``` (default=TevSpCas9) using the corresponding training dataset in the data/ directory.
+```
+--epochs, -e  [Integer epoch value]            Specify number of epochs for training (default: model-specific)
+```
+Epochs: specify the number of training epochs to be run when training the model. By default each model uses its respective 5CV-identified epochs.
+```
+--help, -h                                     Show this help message
+```
+Help: prints available options.
 
-Example command with prediction only, no "compare" option:
-```
-python crisprHAL.py TevSpCas9 test_dataset.csv
-```
-
-Example command with prediction and "compare" option for prediction comparison:
-```
-python crisprHAL.py SpCas9 test_dataset.csv compare
-```
+## 3: Predict with the model
 
 
 ## 4: Preparing your own input CSV Files
 
 Input CSV file for prediction only, no "Compare" option:
 ```
-sgRNA
 ATGCATATCCCTCTTATTGCCGGTCGCG
 GTCTTTATCAGCTAACCAGTCGGTATCC
 CGATGGTCAATATCAGCCGTTGGCGCAG
@@ -151,7 +132,6 @@ GTGGCAATCGTCGTTTTAACCGGCAAAC
 
 Input CSV file for prediction and comparison of the predictions to scores in column 2:
 ```
-sgRNA,score
 CTCGATTGAGGGGCTGGGAATGGGTGAT,8.21062788839
 ATCTTTATCGGTCTTAGCAAAGGCTTTG,30.1092205446
 CGGGCCAGACTGGCCGAGACGGGTCGTT,11.0586722001
