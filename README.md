@@ -50,18 +50,13 @@ Additional information and methods:
 
 ## 0: Requirements
 
-These are in a file called requirements.txt and should be in the working directory.
+Python
 ```
-python
-tensorflow
+python>=3.12.0
 ```
-
-These can be instantiated within a conda environment: ```Time: 1-10 minutes```
-
+Tensorflow version 2.19.0
 ```
-conda create --name HAL
-conda activate HAL
-conda install --file requirements.txt
+python3 -m pip install 'tensorflow[and-cuda]'
 ```
 
 This installation has been tested in Ubuntu 20.04.4 and Mac OSX 10.14.5, but has not been tested on Windows.
