@@ -116,7 +116,7 @@ class processing:
         # Calculate Spearman and Pearson correlations
         predictions = np.array(predictions).flatten()
         spearman_corr, _ = spearmanr(predictions, actual, axis=0)
-        pearson_corr, _ = pearsonr(predictions, actual)
+        pearson_corr, _ = pearsonr(predictions, actual, axis=0)
 
         if message is not None: print(message)
 
