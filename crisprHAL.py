@@ -94,5 +94,6 @@ def run_model():
         process.write_predictions(inputSequences, predictions, outputFile, inputFile, inputScores)
 
 if __name__ == "__main__":
+    print("\nWelcome to crisprHAL 2.0 — Better data for better predictions: data curation improves deep learning for sgRNA/Cas9 prediction\n\nPlease be aware that this is a static repository specific to the paper, and as such may not contain up-to-to date models.\n\nThe production models can be found at github.com/tbrowne5/crisprHAL or online at crisprHAL.streamlit.app — thank you!")
     parse_args(sys.argv[1:])
     run_model()
