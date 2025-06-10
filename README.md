@@ -20,7 +20,7 @@ The Cas9 enzyme along with a single guide RNA molecule is a modular tool for gen
 * figures/ contains the R scripts and data for paper figure generation
 * models/ contains the model saves
 * crisprHAL.py contains the main Python script for model running
-* model.py contains the code for running the models
+* models.py contains the code for running the models
 * processing.py contains the code for input data processing
 
 ## QUICK START
