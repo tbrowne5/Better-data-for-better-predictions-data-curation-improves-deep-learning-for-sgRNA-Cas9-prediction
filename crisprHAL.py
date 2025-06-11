@@ -2,7 +2,7 @@ import sys
 import os
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3" # Specifies which GPU to use
 os.environ["TF_GPU_ALLOCATOR"] = "cuda_malloc_async" # may need: export TF_GPU_ALLOCATOR=cuda_malloc_async
 
 from models import models, modelVersionDefaultEpochs

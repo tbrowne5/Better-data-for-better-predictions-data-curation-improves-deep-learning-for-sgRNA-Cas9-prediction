@@ -4,6 +4,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.layers import Input, Dense, Conv1D, MaxPooling1D, Conv2D, MaxPooling2D, Dropout, Bidirectional, GRU, LeakyReLU, Flatten, concatenate, BatchNormalization
 from tensorflow.keras.models import Model
 
+# Input length specification: [total length, 5' upstream inclusion, 3' downstream inclusion]
 modelVersionInputLength = {
     "TEVSPCAS9": [37, 3, 14],
     "ESPCAS9": [406, 193, 193],
