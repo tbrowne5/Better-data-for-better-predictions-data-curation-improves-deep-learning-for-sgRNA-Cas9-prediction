@@ -50,13 +50,17 @@ Additional information and methods:
 
 ## 0: Requirements
 
-Python
+Python and Tensorflow versions used:
 ```
-python>=3.12.0
+python==3.12
+tensorflow==2.19
 ```
-Tensorflow version 2.19.0
+Create a virtual environment to install Tensorflow and SciPy:
 ```
-python3 -m pip install 'tensorflow[and-cuda]'
+python3.12 -m venv HAL
+source HAL/bin/activate
+pip install tensorflow[and-CUDA]==2.19
+pip install scipy==1.15
 ```
 
 This installation has been tested in Ubuntu 20.04.4 and Mac OSX 10.14.5, but has not been tested on Windows.
