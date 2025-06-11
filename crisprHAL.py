@@ -101,7 +101,7 @@ def run_model():
         model.load_model(modelName)
         compare = True
         for replicationSet in replicationSets:
-            inputSequences, encodedInputSequences, inputScores = process.read_input(modelName, "data/"+modelName+"/"+replicationSet, compare)
+            inputSequences, encodedInputSequences, inputScores = process.read_input(modelName, "data/"+modelName+"_TEST_SETS/"+replicationSet, compare)
             process.compare_predictions(model.predict(encodedInputSequences), inputScores, message=f"Replicated {modelName} model performance on {replicationSet}:")
 
 if __name__ == "__main__":
