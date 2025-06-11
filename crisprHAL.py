@@ -17,11 +17,13 @@ outputFile = None
 compare = False
 circularInput = False
 summary = False
+replicate = False
+replicationSets = ["pTox_TevSpCas9.csv", "pTox_WTSpCas9.csv", "KatG_TevSpCas9.csv"]
 
 # PERHAPS MOVE THIS TO PROCESSING AND HAVE A VERY SIMPLE CRISPRHAL.PY FILE!!!
 
 def parse_args(args):
-    global training, modelName, modelNames, epochs, inputFile, outputFile, compare, circularInput
+    global training, modelName, modelNames, epochs, inputFile, outputFile, compare, circularInput, summary, replicate
 
     for i in range(len(args)):
         if args[i] == "--train" or args[i] == "-t": training = True
@@ -31,6 +33,7 @@ def parse_args(args):
         elif args[i] == "--compare" or args[i] == "-c": compare = True
         elif args[i] == "--epochs" or args[i] == "-e": epochs = int(args[i + 1])
         elif args[i] == "--summary" or args[i] == "-s": summary = True
+        elif args[i] == "--replicate" or args[i] == "-r": replicate = True
         elif args[i] == "--model" or args[i] == "-m" or args[i] == "--enzyme":
             if args[i + 1].upper() in modelNames:
                 if args[i + 1].upper() in ["TEVSPCAS9","TEVCAS9", "TEV", "SPCAS9"]: modelName = "TEVSPCAS9"
@@ -61,7 +64,7 @@ def parse_args(args):
 # If no output specified, but input specified, strip file type annd add _predictions.csv
 
 def run_model():
-    global training, modelName, inputFile, outputFile, compare, epochs, circularInput
+    global training, modelName, inputFile, outputFile, compare, epochs, circularInput, summary, replicate, replicationSets
 
     process = processing()
     model = models(modelName, summary)
@@ -92,6 +95,14 @@ def run_model():
             # Compare predictions with the second column of scores in the input file
             process.compare_predictions(predictions, inputScores)
         process.write_predictions(inputSequences, predictions, outputFile, inputFile, inputScores)
+    
+    if replicate:
+        # Replicate the model and save it
+        model.load_model(modelName)
+        compare = True
+        for replicationSet in replicationSets:
+            inputSequences, encodedInputSequences, inputScores = process.read_input(modelName, "data/"+modelName+"/"+replicationSet, compare)
+            process.compare_predictions(model.predict(encodedInputSequences), inputScores, message=f"Replicated {modelName} model performance on {replicationSet}:")
 
 if __name__ == "__main__":
     print("\nWelcome to crisprHAL 2.0 — Better data for better predictions: data curation improves deep learning for sgRNA/Cas9 prediction\n\nPlease be aware that this is a static repository specific to the paper, and as such may not contain up-to-to date models.\n\nThe production models can be found at github.com/tbrowne5/crisprHAL or online at crisprHAL.streamlit.app — thank you!")
