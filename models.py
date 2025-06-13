@@ -6,7 +6,7 @@ from tensorflow.keras.models import Model
 
 # Input length specification: [total length, 5' upstream inclusion, 3' downstream inclusion]
 modelVersionInputLength = {
-    "TEVSPCAS9": [37, 0, 0],
+    "TEVSPCAS9": [37, 3, 14],
     "ESPCAS9": [406, 193, 193],
     "WT-SPCAS9": [378, 189, 169]
     }
