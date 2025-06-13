@@ -80,13 +80,15 @@ Success here is that the model runs without error, showing that it is installed 
 ```
 python crisprHAL.py [options]
 ```
+Options:
 ```
 --model, -m   [TevSpCas9, eSpCas9, WT-SpCas9]
 ```
 Model (default=TevSpCas9): specify the model to be used. TevSpCas9 should be used for both TevSpCas9 and SpCas9 predictions. WT-SpCas9 should only be used for crisprHAL WT validation.
 ```
+--replicate, -r
 ```
-
+Replicate: load the independent test sets from ```data/[modelName]_TEST_SETS/``` and replicate the model performance shown in the paper.
 ```
 --input, -i   [Input file path]
 ```
