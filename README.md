@@ -85,6 +85,9 @@ python crisprHAL.py [options]
 ```
 Model (default=TevSpCas9): specify the model to be used. TevSpCas9 should be used for both TevSpCas9 and SpCas9 predictions. WT-SpCas9 should only be used for crisprHAL WT validation.
 ```
+```
+
+```
 --input, -i   [Input file path]
 ```
 Input: crisprHAL accepts three types of input files: FASTA (.fasta and .fa), CSV (.csv), and TSV (.tsv). If no input is specified, the model will default to testing on its respective hold-out set.
@@ -133,9 +136,9 @@ python crisprHAL.py --model [TevSpCas9/eSpCas9/WT-SpCas9] --input [input file pa
 
 Preparing your own input CSV (or TSV) file requires more work, as the input must be the exact length required by the specific model. Different models have different target site adjacent sequence inclusion requirements as follows:
 
-* SpCas9/TevSpCas9 prediction: ```37 nucleotides = 3 upstream, 20 sgRNA, 14 downstream (NGG PAM plus 11)```
-* eSpCas9 prediction: ```406 nucleotides = 193 upstream, 20 sgRNA, 193 downstream (NGG PAM plus 190)```
-* WT-SpCas9 prediction: ```378 nucleotides = 189 upstream, 20 sgRNA, 169 downstream (NGG PAM plus 166)```
+* SpCas9/TevSpCas9: ```37 nucleotides = 3 upstream, 20 sgRNA, 14 downstream (NGG PAM plus 11)```
+* eSpCas9: ```406 nucleotides = 193 upstream, 20 sgRNA, 193 downstream (NGG PAM plus 190)```
+* WT-SpCas9: ```378 nucleotides = 189 upstream, 20 sgRNA, 169 downstream (NGG PAM plus 166)```
 
 Input CSV file for prediction only, SpCas9/TevSpCas9 model input, no "Compare" option:
 ```
