@@ -46,6 +46,7 @@ def parse_args(args):
             print("Usage: python crisprHAL.py [options]")
             print("Options:")
             print("  --model, -m   [TevSpCas9, eSpCas9, WT-SpCas9]  Specify the model name (default: TevSpCas9)")
+            print("  --replicate, -r                                Replicate model performance on independent test sets as per the paper")
             print("  --input, -i   [Input file path]                Input file for prediction (fasta, csv, or tsv)")
             print("  --output, -o  [Output file path]               Output file for prediction results")
             print("  --circular                                     Process fasta as a circular input sequence")
