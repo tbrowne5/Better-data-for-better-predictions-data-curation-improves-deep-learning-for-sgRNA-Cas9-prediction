@@ -78,12 +78,25 @@ citro_stats$proportionVsOne <- citro_stats$sgRNAs
 spcas9_stats$proportionVsOne <- spcas9_stats$sgRNAs
 espcas9_stats$proportionVsOne <- espcas9_stats$sgRNAs
 
-citro_cutoff_proportion_plot = ggplot() +
-  geom_line(data=spcas9_stats,aes(x=cutoffVal,y=proportionVsOne),color="#1E90FF",size=1) + 
-  geom_line(data=citro_stats,aes(x=cutoffVal,y=proportionVsOne),color="purple",size=1) +
-  geom_line(data=espcas9_stats,aes(x=cutoffVal,y=proportionVsOne),color="#02BA0F",size=1) +
-  xlim(c(1,100)) + theme_bw() +
-  theme(axis.text.y = element_text(angle = 45, hjust = 1, size = 7), panel.grid = element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(0.5, 0.5, 0, 0.25), "cm")) + ylab("Data Points") + labs(tag="D")
+citro_stats$group <- "Tev"
+espcas9_stats$group <- "eSp"
+spcas9_stats$group <- "WT"
+
+all_groups <- c("Tev", "eSp", "WT")
+citro_stats$group   <- factor(citro_stats$group, levels = all_groups)
+espcas9_stats$group <- factor(espcas9_stats$group, levels = all_groups)
+spcas9_stats$group  <- factor(spcas9_stats$group, levels = all_groups)
+combined_stats <- bind_rows(citro_stats, espcas9_stats, spcas9_stats)
+
+citro_cutoff_proportion_plot <- ggplot(combined_stats, aes(x = cutoffVal, y = proportionVsOne, color = group)) +
+  geom_line(size = 1) +
+  scale_color_manual(name = NULL, values = c("Tev" = "purple", "eSp" = "#02BA0F", "WT" = "#1E90FF"),
+    labels = c("Tev" = expression("crisprHAL"["Tev"]), "eSp" = expression("crisprHAL"["eSp"]), "WT"  = expression("crisprHAL"["WT"]))) +
+  xlim(c(1, 100)) +
+  theme_bw() +
+  theme(legend.position = "top", legend.text = element_text(size = 10), axis.text.y = element_text(angle = 45, hjust = 1, size = 7), panel.grid = element_blank(), axis.title.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    plot.tag = element_text(face = 'bold'), plot.margin = unit(c(0.5, 0.5, 0, 0.25), "cm"), legend.margin = margin(t = -5, b = 5), legend.box.margin = margin(t = 0, b = -10)) +
+  ylab("Data Points") + labs(tag = "D")
 
 delta_cit_top5_df <- read.csv("data/Fig4E_TevSpCas9.csv",row.names=1)
 delta_eSp_top5_df <- read.csv("data/Fig4E_eSpCas9.csv",row.names=1)
@@ -117,5 +130,4 @@ cutoff_layout <- rbind(
   c(5, 5, 5)
 )
 
-grid.arrange(citro_score_trunc, esp_score_trunc, sp_score_trunc, citro_cutoff_proportion_plot,citro_cutoff_plot, layout_matrix = cutoff_layout, heights=c(1,0.6,1))
 grid.arrange(citro_score_trunc, esp_score_trunc, sp_score_trunc, citro_cutoff_proportion_plot,citro_cutoff_plot, layout_matrix = cutoff_layout, heights=c(1,0.6,1.4))
