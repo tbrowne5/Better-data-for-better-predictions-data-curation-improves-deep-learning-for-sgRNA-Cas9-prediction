@@ -31,12 +31,53 @@ SLO_plot <- ggplot(citro_ribbon[4:404,], aes(x = Cutoff, y = mean_spearman), fil
   scale_y_continuous(breaks = seq(0.0, 0.12, by = 0.04), labels = seq(0.00, 0.12, by = 0.04), limits = c(-0.01, 0.14)) +
   xlab("Included nucleotides relative to the sgRNA target") +
   labs(color = element_blank(), tag = "A") +
-  theme(plot.tag = element_text(face = 'bold')) +
+  theme(plot.tag = element_text(face = 'bold'), legend.position = "bottom", legend.text = element_text(size = 10)) +
+  # Legend for color
+  scale_color_manual(name = NULL,
+                     values = c("Tev" = "purple", "eSp" = "darkgreen", "WT" = "#1E90FF"),
+                     labels = c("Tev" = expression("crisprHAL"["Tev"]),
+                                "eSp" = expression("crisprHAL"["eSp"]),
+                                "WT"  = expression("crisprHAL"["WT"]))) +
   geom_point(data = citro_ribbon[c("1","2","3","405","406","407"),], aes(x= c(-260,-240,-220,220,240,260), y=mean_spearman), color = "purple", size=2) +
   geom_point(data = SpCas9_ribbon[c("1","2","3","505","506","507"),], aes(x= c(-260,-240,-220,220,240,260), y=mean_spearman), color = "#1E90FF", size=2) +
   geom_point(data = eSpCas9_ribbon[c("1","2","3","394","395","396"),], aes(x= c(-260,-240,-220,220,240,260), y=mean_spearman), color = "darkgreen", size=2) +
   geom_vline(xintercept = c(-250,-230,-210,210,230,250), linetype="dashed", color="grey")
+
+citro_ribbon$group <- "Tev"
+eSpCas9_ribbon$group <- "eSp"
+SpCas9_ribbon$group <- "WT"
+
+# Base plot
+SLO_plot <- ggplot() +
+  theme_classic() +
+  geom_ribbon(data = citro_ribbon[4:404,], aes(x = Cutoff, ymin = ymin, ymax = ymax), fill = "purple", alpha = 0.15) +
+  geom_ribbon(data = eSpCas9_ribbon[54:454,], aes(x = Cutoff, ymin = ymin, ymax = ymax), fill = "green", alpha = 0.25) +
+  geom_ribbon(data = SpCas9_ribbon[54:454,], aes(x = Cutoff, ymin = ymin, ymax = ymax), fill = "blue", alpha = 0.1) +
+  
+  geom_line(data = citro_ribbon[4:404,], aes(x = Cutoff, y = mean_spearman, color = group), size = 1) +
+  geom_line(data = eSpCas9_ribbon[54:454,], aes(x = Cutoff, y = mean_spearman, color = group), size = 1) +
+  geom_line(data = SpCas9_ribbon[54:454,], aes(x = Cutoff, y = mean_spearman, color = group), size = 1) +
+  
+  geom_point(data = citro_ribbon[c("1","2","3","405","406","407"),], aes(x= c(-260,-240,-220,220,240,260), y=mean_spearman, color = group), size=2) +
+  geom_point(data = SpCas9_ribbon[c("1","2","3","505","506","507"),], aes(x= c(-260,-240,-220,220,240,260), y=mean_spearman, color = group), size=2) +
+  geom_point(data = eSpCas9_ribbon[c("1","2","3","394","395","396"),], aes(x= c(-260,-240,-220,220,240,260), y=mean_spearman, color = group), size=2) +
+  
+  geom_hline(yintercept = 0, alpha = 1) +
+  geom_vline(xintercept = c(-250,-230,-210,210,230,250), linetype = "dashed", color = "grey") +
+  
+  labs(color = element_blank(), tag = "A") +
+  ylab(expression(Delta ~ "Spearman correlation")) +
+  xlab("Included nucleotides relative to the sgRNA target") +
+  scale_x_continuous(breaks = seq(-260, 260, by = 20), labels = custom_labels_ribbon, limits = c(-260, 260)) +
+  scale_y_continuous(breaks = seq(0.0, 0.12, by = 0.04), labels = seq(0.00, 0.12, by = 0.04), limits = c(-0.01, 0.14)) +
+  
+  scale_color_manual(name = NULL, values = c("Tev" = "purple", "eSp" = "darkgreen", "WT" = "#1E90FF"),
+                     labels = c("Tev" = expression("crisprHAL"["Tev"]), "eSp" = expression("crisprHAL"["eSp"]), "WT"  = expression("crisprHAL"["WT"]))) +
+  
+  theme(plot.tag = element_text(face = 'bold'), legend.position = "bottom", legend.text = element_text(size = 10), legend.margin = margin(t = -3, b = 0), legend.box.margin = margin(t = -5))
+
 print(SLO_plot)
+
 
 
 # Fig 5B-D
@@ -62,14 +103,17 @@ for(i in 0:2){
     colour_mid = "#ECECEC"
     if(dataNum == 0){
       colour_end = "darkgreen"
+      x_label = "Dinucleotide position relative to the eSpCas9 NGG PAM"
     }
     if(dataNum == 1){
       colour_end = "blue"
       colour_start = "darkorange"
+      x_label = "Dinucleotide position relative to the WT-SpCas9 NGG PAM"
     }
     if(dataNum == 2){
       colour_end = "#6C3BAA"
       colour_start = "darkorange"
+      x_label = "Dinucleotide position relative to the TevSpCas9 NGG PAM"
     }
   } else {
     colour_start = "blue"
@@ -105,7 +149,7 @@ for(i in 0:2){
     scale_fill_gradientn(colors = c(colour_start, colour_mid, colour_end), breaks = c(-1, 0, 1), limits=c(-1.5,1.5), oob=squish) +
     theme_minimal() +
     scale_x_discrete(labels = custom_labels) +
-    labs(tag=pTag,x = "Dinucleotide position relative to the NGG PAM", y = "Dinucleotides", fill = "Mean\nscore\n") + #, title = title_text) +
+    labs(tag=pTag,x = x_label, y = "Dinucleotides", fill = "Mean\nscore\n") + #, title = title_text) +
     theme(axis.text.x = element_text(angle = 0, hjust = 0.5, size = 6), legend.key.height = unit(0.4, "cm"), plot.tag = element_text(face = 'bold'), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.ticks = element_blank())
   
   if(dataNum == 0){
