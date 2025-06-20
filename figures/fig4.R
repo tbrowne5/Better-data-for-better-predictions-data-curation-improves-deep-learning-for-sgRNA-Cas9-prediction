@@ -83,7 +83,7 @@ citro_cutoff_proportion_plot = ggplot() +
   geom_line(data=citro_stats,aes(x=cutoffVal,y=proportionVsOne),color="purple",size=1) +
   geom_line(data=espcas9_stats,aes(x=cutoffVal,y=proportionVsOne),color="#02BA0F",size=1) +
   xlim(c(1,100)) + theme_bw() +
-  theme(axis.text.y = element_text(angle = 50, hjust = 1, size = 7), panel.grid = element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(0.5, 0.5, 0, 0.25), "cm")) + ylab("Data Points") + labs(tag="D")
+  theme(axis.text.y = element_text(angle = 55, hjust = 1, size = 7), panel.grid = element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(0.5, 0.5, 0, 0.25), "cm")) + ylab("Data Points") + labs(tag="D")
 
 delta_cit_top5_df <- read.csv("data/Fig4E_TevSpCas9.csv",row.names=1)
 delta_eSp_top5_df <- read.csv("data/Fig4E_eSpCas9.csv",row.names=1)
@@ -101,9 +101,9 @@ citro_cutoff_plot = ggplot() + geom_smooth(data=delta_cit_top5_df, aes(x=Cutoff,
   geom_point(data=delta_cit_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.3, color="purple") + 
   geom_point(data=delta_eSp_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.4, color="#02BA0F") + 
   geom_point(data=delta_Sp_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.3, color="blue") + 
-  geom_vline(xintercept = c(19.5), linetype="dashed", color="grey") +
+  geom_vline(xintercept = c(19.5), linetype="dashed", color="darkgrey") +
   xlab("Control condition minimum read count cutoff") + ylab(expression(Delta ~ "Spearman correlation")) + theme_bw() +
-  theme(panel.grid = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(-0.35, 0.5, 0.5, 0.25), "cm")) + xlim(c(1,100)) + labs(tag="E")
+  theme(panel.grid = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(-0.2, 0.5, 0.5, 0.25), "cm")) + xlim(c(1,100)) + labs(tag="E")
 
 grid.arrange(citro_cutoff_proportion_plot,citro_cutoff_plot, heights=c(1,3))
 
@@ -117,3 +117,4 @@ cutoff_layout <- rbind(
 )
 
 grid.arrange(citro_score_trunc, esp_score_trunc, sp_score_trunc, citro_cutoff_proportion_plot,citro_cutoff_plot, layout_matrix = cutoff_layout, heights=c(1,0.6,1))
+grid.arrange(citro_score_trunc, esp_score_trunc, sp_score_trunc, citro_cutoff_proportion_plot,citro_cutoff_plot, layout_matrix = cutoff_layout, heights=c(1,0.6,1.4))
