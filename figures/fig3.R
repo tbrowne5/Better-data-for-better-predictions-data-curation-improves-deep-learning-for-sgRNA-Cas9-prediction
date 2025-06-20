@@ -30,6 +30,7 @@ dataplot <- ggplot(data[,c(2,1)])
 dataplot <- dataplot + geom_point(aes(data$actualscore, data$prediction, color=abs(data$density)), size=0.5) + labs(tag = "A", color='Density')
 dataplot <- dataplot + scale_color_viridis(option="magma",begin=0.1,end=0.9,direction=-1) + theme(panel.background = element_rect(fill = "white", color = NA), plot.tag = element_text(face = 'bold'), plot.margin = unit(c(5, 5, 5, 5), "pt"), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.border = element_rect(colour = "black", fill=NA, size=0.5), legend.key.width = unit(0.3, 'cm'), legend.key.height = unit(0.5,'cm'), legend.title = element_text(size=7),legend.text = element_text(size=6)) + scale_x_continuous(labels = scales::number_format(accuracy = 1), breaks = c(-8,-4, 0, 4)) + scale_y_continuous(labels = scales::number_format(accuracy = 1), breaks = c(-8,-4, 0, 4)) + xlab("Activity Score") + ylab("Prediction")
 dataplot = dataplot + coord_cartesian(ylim=c(non0ymin,non0ymax),xlim=c(non0xmin,non0xmax),clip="on")
+dataplot <- dataplot + ggtitle(expression("crisprHAL"["Tev"])) + theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12))
 
 print(dataplot)
 
@@ -52,6 +53,7 @@ dataplot <- ggplot(data[,c(2,1)])
 dataplot <- dataplot + geom_point(aes(data$actualscore, data$prediction, color=abs(data$density)), size=0.5) + labs(tag = "B", color='Density')
 dataplot <- dataplot + scale_color_viridis(begin=0,end=0.95,direction=-1) + theme(panel.background = element_rect(fill = "white", color = NA), plot.tag = element_text(face = 'bold'), plot.margin = unit(c(5, 5, 5, 5), "pt"), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.border = element_rect(colour = "black", fill=NA, size=0.5), legend.key.width = unit(0.3, 'cm'), legend.key.height = unit(0.5,'cm'), legend.title = element_text(size=7),legend.text = element_text(size=6)) + scale_y_continuous(labels = scales::number_format(accuracy = 1), breaks = c(-8,-4, 0, 4)) + xlab("Activity Score") + ylab("Prediction")
 dataplot <- dataplot + coord_cartesian(ylim=c(non0ymin,non0ymax),xlim=c(non0xmin,non0xmax),clip="on")
+dataplot <- dataplot + ggtitle(expression("crisprHAL"["eSp"])) + theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12))
 
 print(dataplot)
 
@@ -74,6 +76,7 @@ dataplot <- ggplot(data[,c(2,1)])
 dataplot <- dataplot + geom_point(aes(data$actualscore, data$prediction, color=abs(data$density)), size=0.5) + labs(tag = "C", color='Density')
 dataplot <- dataplot + scale_color_viridis(option="mako",begin=0,end=0.95,direction=-1) + theme(panel.background = element_rect(fill = "white", color = NA), plot.tag = element_text(face = 'bold'), plot.margin = unit(c(5, 5, 5, 5), "pt"), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.border = element_rect(colour = "black", fill=NA, size=0.5), legend.key.width = unit(0.3, 'cm'), legend.key.height = unit(0.5,'cm'), legend.title = element_text(size=7),legend.text = element_text(size=6)) + scale_y_continuous(labels = scales::number_format(accuracy = 1), breaks = c(-8,-4, 0, 4)) + scale_x_continuous(labels = scales::number_format(accuracy = 1), breaks = c(-8,-4, 0, 4)) + xlab("Activity Score") + ylab("Prediction")
 dataplot <- dataplot + coord_cartesian(ylim=c(non0ymin,non0ymax),xlim=c(non0xmin,non0xmax),clip="on")
+dataplot <- dataplot + ggtitle(expression("crisprHAL"["WT"])) + theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 12))
 
 print(dataplot)
 
