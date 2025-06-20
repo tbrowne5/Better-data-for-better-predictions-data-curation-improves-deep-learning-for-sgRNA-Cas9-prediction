@@ -83,13 +83,15 @@ citro_cutoff_proportion_plot = ggplot() +
   geom_line(data=citro_stats,aes(x=cutoffVal,y=proportionVsOne),color="purple",size=1) +
   geom_line(data=espcas9_stats,aes(x=cutoffVal,y=proportionVsOne),color="#02BA0F",size=1) +
   xlim(c(1,100)) + theme_bw() +
-  theme(axis.text.y = element_text(angle = 55, hjust = 1, size = 7), panel.grid = element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(0.5, 0.5, 0, 0.25), "cm")) + ylab("Data Points") + labs(tag="D")
+  theme(axis.text.y = element_text(angle = 45, hjust = 1, size = 7), panel.grid = element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(0.5, 0.5, 0, 0.25), "cm")) + ylab("Data Points") + labs(tag="D")
 
 delta_cit_top5_df <- read.csv("data/Fig4E_TevSpCas9.csv",row.names=1)
 delta_eSp_top5_df <- read.csv("data/Fig4E_eSpCas9.csv",row.names=1)
 delta_Sp_top5_df <- read.csv("data/Fig4E_WTSpCas9.csv",row.names=1)
 
-citro_cutoff_plot = ggplot() + geom_smooth(data=delta_cit_top5_df, aes(x=Cutoff, y=mean_spearman), method = "loess", color = "purple", se = TRUE, span = 0.5) +
+citro_cutoff_plot = ggplot() +
+  geom_vline(xintercept = c(20), size=0.5, linetype="dashed", color="darkgrey") +
+  geom_smooth(data=delta_cit_top5_df, aes(x=Cutoff, y=mean_spearman), method = "loess", color = "purple", se = TRUE, span = 0.5) +
   geom_smooth(data=delta_eSp_top5_df, aes(x=Cutoff, y=mean_spearman), method = "loess", color = "#02BA0F", se = TRUE, span = 0.5) +
   geom_smooth(data=delta_Sp_top5_df, aes(x=Cutoff, y=mean_spearman), method = "loess", color = "#1E90FF", se = TRUE, span = 0.5) +
   geom_point(data = subset(delta_cit_top5_df, Cutoff == 56), aes(x = Cutoff, y = mean_spearman), 
@@ -101,7 +103,6 @@ citro_cutoff_plot = ggplot() + geom_smooth(data=delta_cit_top5_df, aes(x=Cutoff,
   geom_point(data=delta_cit_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.3, color="purple") + 
   geom_point(data=delta_eSp_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.4, color="#02BA0F") + 
   geom_point(data=delta_Sp_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.3, color="blue") + 
-  geom_vline(xintercept = c(19.5), linetype="dashed", color="darkgrey") +
   xlab("Control condition minimum read count cutoff") + ylab(expression(Delta ~ "Spearman correlation")) + theme_bw() +
   theme(panel.grid = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(-0.2, 0.5, 0.5, 0.25), "cm")) + xlim(c(1,100)) + labs(tag="E")
 
