@@ -101,6 +101,7 @@ citro_cutoff_plot = ggplot() + geom_smooth(data=delta_cit_top5_df, aes(x=Cutoff,
   geom_point(data=delta_cit_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.3, color="purple") + 
   geom_point(data=delta_eSp_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.4, color="#02BA0F") + 
   geom_point(data=delta_Sp_top5_df, aes(x=Cutoff, y=mean_spearman), alpha = 0.3, color="blue") + 
+  geom_vline(xintercept = c(19.5), linetype="dashed", color="grey") +
   xlab("Control condition minimum read count cutoff") + ylab(expression(Delta ~ "Spearman correlation")) + theme_bw() +
   theme(panel.grid = element_blank(), plot.tag = element_text(face = 'bold'),plot.margin = unit(c(-0.35, 0.5, 0.5, 0.25), "cm")) + xlim(c(1,100)) + labs(tag="E")
 
