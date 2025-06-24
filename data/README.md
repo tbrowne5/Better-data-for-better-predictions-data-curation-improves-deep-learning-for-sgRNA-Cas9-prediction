@@ -3,7 +3,7 @@
 
 This directory contains the crisprHAL Tev, crisprHAL eSp, and crisprHAL WT model training and hold-out test sets, with model-specific input lengths.
 
-### Files in the (TEV/ESP/WT) subdirectory:
+### Files in each \[TEV/ESP/WT-]SPCAS9_TEST_SETS subdirectory:
 * pTox TevSpCas9 independent test set with requisite model input length
 * pTox WT-SpCas9 independent test set with requisite model input length
 * KatG TevSpCas9 independent test set with requisite model input length
