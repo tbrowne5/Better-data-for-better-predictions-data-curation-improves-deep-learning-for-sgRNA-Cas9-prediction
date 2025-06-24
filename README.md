@@ -16,7 +16,7 @@ Note: this is a static paper-specific repository, and as such, may not contain u
 The Cas9 enzyme along with a single guide RNA molecule is a modular tool for genetic engineering and has shown effectiveness as a species-specific anti-microbial. The ability to accurately predict on-target cleavage is critical as activity varies by target. Using the sgRNA nucleotide sequence and an activity score, predictive models have been developed with the best performance resulting from deep learning architectures. Prior work has emphasized robust and novel architectures to improve predictive performance. Here, we explore the impact of a data-centric approach through optimization of the input target site adjacent nucleotide sequence length and the use of data filtering for read counts in the control conditions  to improve input data utility. Using the existing crisprHAL architecture, we develop crisprHAL Tev, a best-in-class bacterial SpCas9 prediction model with performance that generalizes between related species and across data types. During this process, we also rebuild two prior *E. coli* Cas9 datasets, demonstrating the importance of data quality, and resulting in the production of an improved bacterial eSpCas9 prediction model.
 
 ## FILES AND DIRECTORIES:
-* data/ contains raw data, model training data, and hold-out test sets
+* data/ contains model training & testing data, raw data, and supplementary data
 * figures/ contains the R scripts and data for paper figure generation
 * models/ contains the model saves
 * crisprHAL.py contains the main Python script for model running
