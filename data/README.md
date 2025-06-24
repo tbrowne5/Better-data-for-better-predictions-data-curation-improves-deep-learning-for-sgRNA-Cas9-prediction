@@ -1,7 +1,7 @@
 
-## Model Data and Raw Data
+## Model, Paper, Raw, and Supplementary Data
 
-This directory contains the crisprHAL Tev, crisprHAL eSp, and crisprHAL WT model training and hold-out test sets, with model-specific input lengths.
+This directory contains the crisprHAL Tev, crisprHAL eSp, and crisprHAL WT model training and hold-out test sets, with model-specific input lengths. Additionally, it contains independent test sets for each model, raw data used for dataset generation, and supplementary data from the paper: "Better data for better predictions: data curation improves deep learning  for sgRNA/Cas9  prediction".
 
 ### Files in each \[TEV/ESP/WT-]SPCAS9_TEST_SETS subdirectory:
 * pTox TevSpCas9 independent test set with requisite model input length
