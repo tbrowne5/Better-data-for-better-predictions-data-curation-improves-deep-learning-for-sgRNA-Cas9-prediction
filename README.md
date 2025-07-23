@@ -1,4 +1,4 @@
-# crisprHAL — Better data for better predictions: data curation improves deep learning for sgRNA/Cas9 prediction
+# crisprHAL — [Better data for better predictions: data curation improves deep learning for sgRNA/Cas9 prediction](https://www.biorxiv.org/content/10.1101/2025.06.24.661356v1.full)
 Note: this is a static paper-specific repository, and as such, may not contain up-to-date models. For the crisprHAL prediction tool, please visit the first link below or visit the website at the second link below.
 
 ## Links to the crisprHAL repositories, papers, and web tool:
