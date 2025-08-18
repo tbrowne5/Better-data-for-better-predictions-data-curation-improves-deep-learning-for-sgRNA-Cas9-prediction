@@ -215,4 +215,4 @@ Information about data processing can be found under crisprHAL/data/rawData
 
 ## 8: How to cite crisprHAL 2.0
 
-Browne, T.S., et al. Better data for better predictions: data curation improves deep learning for sgRNA/Cas9 prediction. **BioRxiv**, (Pre-Print). https://doi.org/10.1101/2025.06.24.661356
+Browne, T.S., et al. Better data for better predictions: data curation improves deep learning for sgRNA/Cas9 prediction. **BioRxiv**. (Pre-Print) https://doi.org/10.1101/2025.06.24.661356
