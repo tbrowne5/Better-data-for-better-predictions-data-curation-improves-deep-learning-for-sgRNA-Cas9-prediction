@@ -1,4 +1,5 @@
 
+library("dplyr")
 library("ALDEx2")
 library("reshape2")
 
@@ -40,7 +41,7 @@ for (cutoff in min_dCas_cutoff:max_dCas_cutoff){
   }
   WTSpCas9_aldex.diff <- ALDEx2::aldex.effect(WTSpCas9_aldex.diff)
   WTSpCas9_aldex.diff <- merge(all_ecoli_sites_found, WTSpCas9_aldex.diff,by.x=2,by.y=0)
-  WTSpCas9_aldex.diff <- WTSpCas9_aldex.diff[!duplicated(WTSpCas9_aldex.diff$sgRNAs),]
+  WTSpCas9_aldex.diff <- WTSpCas9_aldex.diff[!duplicated(WTSpCas9_aldex.diff$sgRNA20),]
   print(nrow(WTSpCas9_aldex.diff))
 
   row.names(WTSpCas9_aldex.diff) <- WTSpCas9_aldex.diff$sgRNAs
