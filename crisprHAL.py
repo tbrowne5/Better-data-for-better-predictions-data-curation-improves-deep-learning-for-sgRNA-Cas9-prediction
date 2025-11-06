@@ -20,8 +20,6 @@ summary = False
 replicate = False
 replicationSets = ["pTox_TevSpCas9.csv", "pTox_WTSpCas9.csv", "KatG_TevSpCas9.csv"]
 
-# PERHAPS MOVE THIS TO PROCESSING AND HAVE A VERY SIMPLE CRISPRHAL.PY FILE!!!
-
 def parse_args(args):
     global training, modelName, modelNames, epochs, inputFile, outputFile, compare, circularInput, summary, replicate
 
